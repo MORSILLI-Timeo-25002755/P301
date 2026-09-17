@@ -27,7 +27,7 @@ try {
     // Contenu de l'e-mail
     $mail->isHTML(true);                                  // Format HTML actif
     $mail->CharSet = 'UTF-8';                             // Gestion des accents
-    $mail->Subject = 'Sujet de votre message';
+    $mail->Subject = 'Test d\'envoi';
     $mail->Body    = '<h1>Bonjour</h1><p>Ceci est un e-mail envoyé via le SMTP d\'Alwaysdata !</p>';
     $mail->AltBody = 'Ceci est la version texte brut pour les clients e-mail non compatibles HTML';
 
