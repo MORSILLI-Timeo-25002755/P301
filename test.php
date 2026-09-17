@@ -21,7 +21,7 @@ try {
     $mail->Port       = "{$_SERVER['SSL_PORT']}";                              // Port pour SSL
 
     // Destinataires
-    $mail->setFrom("{$_SERVER['MAIL_ADDRESS']}", 'Horsemen blablanbla');
+    $mail->setFrom("{$_SERVER['MAIL_ADDRESS']}", 'ApocalypseHorsemen');
     $mail->addAddress('matteoyni@gmail.com');
 
     // Contenu de l'e-mail
