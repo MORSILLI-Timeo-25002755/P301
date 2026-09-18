@@ -14,15 +14,15 @@ try {
     $mail->isSMTP();
     $mail->Host       = "{$_SERVER['MAIL_HOST']}";
     $mail->SMTPAuth   = true;
-    $mail->Username   = "{$_SERVER['MAIL_ADDRESS']}"; // Votre email Alwaysdata
+    $mail->Username   = "{$_SERVER['MAIL_ADDRESS']}";
     $mail->Password   =
-        "{$_SERVER['MAIL_PASSWORD']}";             // Votre mot de passe email
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;      // Sécurisation SSL
-    $mail->Port       = "{$_SERVER['SSL_PORT']}";                              // Port pour SSL
+        "{$_SERVER['MAIL_PASSWORD']}";
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+    $mail->Port       = "{$_SERVER['SMTPS_PORT']}";
 
     // Destinataires
     $mail->setFrom("{$_SERVER['MAIL_ADDRESS']}", 'ApocalypseHorsemen');
-    $mail->addAddress('matteoyni@gmail.com');
+    $mail->addAddress('mattenyni@gmail.com');
 
     // Contenu de l'e-mail
     $mail->isHTML(true);                                  // Format HTML actif
