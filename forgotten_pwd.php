@@ -22,7 +22,7 @@ try {
 
     // Destinataires
     $mail->setFrom("{$_SERVER['MAIL_ADDRESS']}", 'ApocalypseHorsemen');
-    $mail->addAddress('matteoyni@gmail.com');
+    $mail->addAddress('matteoyni@gmail.com'); // Récupérer l'adresse rentrée par l'utilisateur
 
     // Contenu de l'e-mail
     $mail->isHTML(true);
