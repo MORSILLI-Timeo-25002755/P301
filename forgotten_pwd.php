@@ -2,8 +2,9 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require 'vendor/autoload.php';
+require 'vendor/autoload.php'; // Autoload des plugins
 
+// Initialisation du dotenv
 $dotenv = DotenvVault\DotenvVault::createImmutable(__DIR__);
 $dotenv->safeLoad();
 
@@ -12,13 +13,12 @@ $mail = new PHPMailer(true);
 try {
     // Configuration du serveur SMTP Alwaysdata
     $mail->isSMTP();
-    $mail->Host       = "{$_SERVER['MAIL_HOST']}";
-    $mail->SMTPAuth   = true;
-    $mail->Username   = "{$_SERVER['MAIL_ADDRESS']}";
-    $mail->Password   =
-        "{$_SERVER['MAIL_PASSWORD']}";
+    $mail->Host = "{$_SERVER['MAIL_HOST']}";
+    $mail->SMTPAuth = true;
+    $mail->Username = "{$_SERVER['MAIL_ADDRESS']}";
+    $mail->Password = "{$_SERVER['MAIL_PASSWORD']}";
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-    $mail->Port       = "{$_SERVER['SMTP_PORT']}";
+    $mail->Port = "{$_SERVER['SMTP_PORT']}";
 
     // Destinataires
     $mail->setFrom("{$_SERVER['MAIL_ADDRESS']}", 'ApocalypseHorsemen');
@@ -28,7 +28,7 @@ try {
     $mail->isHTML(true);
     $mail->CharSet = 'UTF-8';
     $mail->Subject = 'Test d\'envoi';
-    $mail->Body    = '<h1>Bonjour</h1><p>Ceci est un e-mail envoyé via le SMTP d\'Alwaysdata !</p>';
+    $mail->Body = '<h1>Bonjour</h1><p>Ceci est un e-mail envoyé via le SMTP d\'Alwaysdata !</p>';
     $mail->AltBody = 'Ceci est la version texte brut pour les clients e-mail non compatibles HTML';
 
     $mail->send();
