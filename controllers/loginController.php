@@ -7,7 +7,7 @@ use models\loginModel;
 require_once("models/loginModel.php");
 require_once("views/loginView.php");
 
-class loginController
+class LoginController
 {
     public function execute(): void
     {
