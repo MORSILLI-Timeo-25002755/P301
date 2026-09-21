@@ -1,23 +1,21 @@
 <?php
-
-use Controllers\loginController;
-
 require '_assets/includes/autoloader.php';
-require_once("controllers/loginController.php");
-$controller = new loginController();
-try {
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $controller->login();
-    } else {
-        $controller->execute();
-    }
-} catch (Exception $e) {
-    echo $e->getMessage();
-}
 
-/*
+$routes = [
+    '/'      => \Controllers\Homepage::class,
+    '/login' => \Controllers\Login::class,
+];
+
+$path = rtrim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/') ?: '/';
+
 try {
-    (new \Controllers\Homepage())->execute();
-} catch (ControllerException $e) {
+    if (!isset($routes[$path])) {
+        http_response_code(404);
+        (new \Views\Error('Page introuvable'))->show();
+        exit;
+    }
+
+    (new $routes[$path]())->execute();
+} catch (\Exceptions\ControllerException $e) {
     (new \Views\Error($e->getMessage()))->show();
-} */
+}
