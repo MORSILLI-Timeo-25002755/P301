@@ -2,11 +2,10 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-// Config dotenv
 require 'vendor/autoload.php';
+
 $dotenv = DotenvVault\DotenvVault::createImmutable(__DIR__);
 $dotenv->safeLoad();
-
 
 $mail = new PHPMailer(true);
 
@@ -19,7 +18,7 @@ try {
     $mail->Password   =
         "{$_SERVER['MAIL_PASSWORD']}";
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-    $mail->Port       = "{$_SERVER['SSL_PORT']}";
+    $mail->Port       = "{$_SERVER['SMTP_PORT']}";
 
     // Destinataires
     $mail->setFrom("{$_SERVER['MAIL_ADDRESS']}", 'ApocalypseHorsemen');
