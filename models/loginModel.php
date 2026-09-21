@@ -2,7 +2,7 @@
 
 namespace models;
 
-class loginModel
+class LoginModel
 {
     function checkLogin($username, $password): bool
     {

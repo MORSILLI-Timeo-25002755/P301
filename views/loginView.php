@@ -2,7 +2,7 @@
 
 namespace Views;
 
-class loginView
+class LoginView
 {
     public function show(): void { // PSR-12: opening brace next line
         ?>
