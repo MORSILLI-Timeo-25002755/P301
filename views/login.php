@@ -1,13 +1,18 @@
 <?php
-namespace Views; // PSR-12: head blocks must be separated by a single blank line
-class Login { // PSR-12: opening brace next line
+
+namespace Views;
+
+class Login
+{
     public function show(): void { // PSR-12: opening brace next line
         ?>
-        <form action="">
-            <input type="email" name="" id="">
-            <input type="password" name="" id="">
-            <input type="submit" value="">
+        <form method="post" action="">
+            <input type="email" name="email" required>
+            <br>
+            <input type="password" name="pwd" required>
+            <br>
+            <button type="submit">Se connecter</button>
         </form>
-<?php
+        <?php
     }
 }
