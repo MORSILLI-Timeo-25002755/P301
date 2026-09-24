@@ -2,7 +2,7 @@
 
 namespace Controllers;
 
-use models\loginModel;
+use models\login;
 
 require_once("models/login.php");
 require_once("views/login.php");
