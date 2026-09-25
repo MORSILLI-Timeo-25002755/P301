@@ -2,11 +2,6 @@
 
 namespace Controllers;
 
-use models\login;
-
-require_once("models/login.php");
-require_once("views/login.php");
-
 class Login
 {
     public function execute(): void
