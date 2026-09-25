@@ -3,7 +3,7 @@ namespace Controllers;
 use Includes\Database\DatabaseConnection;
 use Models\Post;
 
-class Homepage
+class Example
 {
     public function execute(): void
     {
