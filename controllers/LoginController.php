@@ -6,6 +6,7 @@ use _Assets\Includes\DatabaseConnection;
 use models\UserRepository;
 use models\Users;
 use Views\Login;
+use Views\Error;
 
 class LoginController
 {
@@ -23,7 +24,7 @@ class LoginController
         $user = $userRepository->checkLogin($email, $password);
 
         if ($user === null) {
-            (new Login(error: 'ID INCORRECT'))->show();
+            (new Error('ID INCORRECT'))->show();
             return;
         }
 
