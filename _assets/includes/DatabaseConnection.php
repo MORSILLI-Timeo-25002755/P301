@@ -6,6 +6,7 @@ require __DIR__ . '/../../vendor/autoload.php';
 
 use Dotenv\Dotenv;
 use PDO;
+use PDOException;
 
 $dotenv = Dotenv::createImmutable(__DIR__ . '/../../');
 $dotenv->safeLoad();
@@ -26,7 +27,7 @@ class DatabaseConnection {
             $this->pdo->exec("set character set utf8");
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch(PDOException $e) {
-            die("Connection failed: " . $e->getMessage());
+            (new \Views\Error('Connection failed: ' . $e->getMessage()))->show();
         }
     }
 
