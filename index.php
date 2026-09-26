@@ -4,6 +4,7 @@ require '_assets/includes/autoloader.php';
 $routes = [
     '/'      => \Controllers\Homepage::class,
     '/login' => \Controllers\LoginController::class,
+    '/register' => \Controllers\RegisterController::class
 ];
 
 $path = rtrim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/') ?: '/';
