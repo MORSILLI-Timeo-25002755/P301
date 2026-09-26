@@ -9,8 +9,9 @@ class Error { // PSR-12: opening brace next line
     }
 
     public function show(): void { // PSR-12: opening brace next line
+        begin_page('Erreur','_assets/css/error.css');
         ?>
-        <h1 style="color:red;">Erreur: <?=$this->message?></h1>
+        <h1>Erreur: <?=$this->message?></h1>
 <?php
     }
 }
