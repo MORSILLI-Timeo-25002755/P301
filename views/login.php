@@ -4,20 +4,19 @@ namespace Views;
 
 class Login
 {
-    public function __construct(private ?string $error = null) {}
-
-    public function show(): void
-    {
+    public function show(): void { // PSR-12: opening brace next line
+        begin_page('Login', '_assets/css/login.css');
         ?>
-        <?php if ($this->error) { ?>
-            <p style="color:red;"><?= htmlspecialchars($this->error) ?></p>
-        <?php }
-        begin_page('Login','_assets/css/login.css'); ?>
-        <form method="post" action="/login">
+        <form method="post" action="">
+            <h1>Connexion</h1>
+            <p>Connectez-vous à votre compte</p>
+
+            <label for="email">Adresse e-mail</label>
             <input type="email" name="email" required>
-            <br>
+
+            <label for="pwd">Mot de passe</label>
             <input type="password" name="password" required>
-            <br>
+
             <button type="submit">Se connecter</button>
         </form>
         <?php
