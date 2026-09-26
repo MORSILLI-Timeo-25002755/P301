@@ -11,7 +11,7 @@ class Login
         ?>
         <?php if ($this->error) { ?>
             <p style="color:red;"><?= htmlspecialchars($this->error) ?></p>
-        <?php } ?>
+        <?php }
         begin_page('Login','_assets/css/login.css'); ?>
         <form method="post" action="/login">
             <input type="email" name="email" required>
