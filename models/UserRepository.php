@@ -11,6 +11,29 @@ class UserRepository
 {
     public function __construct(private DatabaseConnection $dbConnection) {}
 
+    public function insertUser(string $email, string $username, string $password): bool
+    {
+        try {
+            $this->run(
+                'INSERT INTO Users (email, username, password)
+                 VALUES (:email, :username, :password)',
+                [
+                    ':email' => $email,
+                    ':username' => $username,
+                    ':password' => password_hash($password, PASSWORD_DEFAULT)
+                ]
+            );
+
+            return true;
+        } catch (\PDOException $e) {
+            if ($e->errorInfo[1] === 1062) {
+                // Email ou username déjà utilisé
+                return false;
+            }
+            return false;
+        }
+    }
+
     public function checkLogin($email, $password): ?Users
     {
         $statement = $this->run(
