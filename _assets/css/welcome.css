@@ -1,0 +1,133 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f8fafc;
+    color: #0f172a;
+}
+
+main {
+    min-height: 100vh;
+}
+
+.hero {
+    padding: 100px 20px;
+    text-align: center;
+}
+
+.badge {
+    display: inline-block;
+    padding: 8px 14px;
+    border-radius: 20px;
+    background: #e0e7ff;
+    color: #4338ca;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+h1 {
+    margin-top: 24px;
+    font-size: 56px;
+}
+
+h1 strong {
+    color: #4f46e5;
+}
+
+.description {
+    max-width: 600px;
+    margin: 24px auto;
+    color: #64748b;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+nav[aria-label="Actions principales"] {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 32px;
+}
+
+.button {
+    padding: 12px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.button-primary {
+    background: #4f46e5;
+    color: white;
+}
+
+.button-primary:hover {
+    background: #4338ca;
+}
+
+.button-secondary {
+    background: white;
+    color: #334155;
+    border: 1px solid #cbd5e1;
+}
+
+.button-secondary:hover {
+    background: #f1f5f9;
+}
+
+section[aria-labelledby="features-title"] {
+    max-width: 1000px;
+    margin: auto;
+    padding: 40px 20px 80px;
+}
+
+section h2 {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+section article {
+    display: inline-block;
+    width: calc(33.333% - 14px);
+    margin-right: 16px;
+    padding: 24px;
+    vertical-align: top;
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+}
+
+section article:last-of-type {
+    margin-right: 0;
+}
+
+section article h3 {
+    margin-bottom: 10px;
+}
+
+section article p {
+    color: #64748b;
+    line-height: 1.5;
+}
+
+@media (max-width: 700px) {
+    .hero {
+        padding: 70px 20px;
+    }
+
+    h1 {
+        font-size: 40px;
+    }
+
+    nav[aria-label="Actions principales"] {
+        flex-direction: column;
+    }
+
+    .button {
+        text-align: center;
+    }
+
+    section article {
+        display: block;
+        width: 100%;
+        margin: 0 0 16px;
+    }
+}
