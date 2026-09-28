@@ -6,7 +6,7 @@ class Homepage
 {
     public function show(): void
     {
-        begin_page('Accueil', '_assets/css/welcome.css');
+        begin_page('Accueil', '_assets/css/welcome.css', false);
         ?>
         <main>
             <header class="hero">

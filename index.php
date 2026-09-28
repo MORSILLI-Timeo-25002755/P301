@@ -22,7 +22,7 @@ try {
     (new \Views\Error('Erreur',$e->getMessage()))->show();
 }
 
-function begin_page($title, $style): void {
+function begin_page($title, $style, $navbar = true): void {
     ?>
     <!doctype html>
     <html lang="fr">
@@ -34,7 +34,17 @@ function begin_page($title, $style): void {
         <title><?=$title?></title>
     </head>
     <body>
-    <?php
+    <?php if ($navbar) {
+        $currentPage = $_SERVER['REQUEST_URI']
+        ?>
+    <nav class="navbar">
+        <ul class="nav-links">
+            <li><a href="/", class="<?php echo ($currentPage == '/') ? 'active' : ''; ?>">Accueil</a></li>
+            <li><a href="/login" class="<?php echo ($currentPage == '/login') ? 'active' : ''; ?>">Connexion</a></li>
+            <li><a href="/register" class="<?php echo ($currentPage == '/register') ? 'active' : ''; ?>">Inscription</a></li>
+        </ul>
+    </nav>
+    <?php }
 }
 
 function end_page(): void {
