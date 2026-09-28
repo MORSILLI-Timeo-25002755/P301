@@ -9,7 +9,8 @@ class Form
         private string $name,
         private int $userId,
         private int $questionsCount = 0,
-        private int $answersCount = 0
+        private int $answersCount = 0,
+        private ?string $authorUsername = null
     ) {}
 
     public function getId(): int
@@ -35,5 +36,15 @@ class Form
     public function getAnswersCount(): int
     {
         return $this->answersCount;
+    }
+
+    public function getAuthorUsername(): ?string
+    {
+        return $this->authorUsername;
+    }
+
+    public function isOwner(int $userId): bool
+    {
+        return $this->userId === $userId;
     }
 }

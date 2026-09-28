@@ -23,6 +23,7 @@ class Panel
             <div class="navbar-container">
                 <a href="/panel" class="navbar-brand">Sondages<strong>App</strong></a>
                 <div class="navbar-user">
+                    <a href="/surveys" class="nav-link">Explorer les sondages</a>
                     <span class="user-greeting">
                         Bonjour, <strong><?= htmlspecialchars($this->user->getUsername() ?: $this->user->getEmail()) ?></strong>
                     </span>
@@ -113,6 +114,15 @@ class Panel
                                 </div>
 
                                 <div class="survey-actions">
+                                    <a href="/survey/edit?id=<?= $form->getId() ?>" class="button-action button-action-primary" title="Modifier les questions">
+                                        &#9998; Questions
+                                    </a>
+                                    <a href="/survey/stats?id=<?= $form->getId() ?>" class="button-action" title="Consulter les statistiques">
+                                        &#128202; Statistiques
+                                    </a>
+                                    <a href="/survey/vote?id=<?= $form->getId() ?>" class="button-action" title="Lien de vote à partager" target="_blank">
+                                        &#128279; Lien votant
+                                    </a>
                                     <form method="POST" action="/panel" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer le sondage &quot;<?= htmlspecialchars(addslashes($form->getName())) ?>&quot; ?');">
                                         <input type="hidden" name="action" value="delete">
                                         <input type="hidden" name="id_form" value="<?= $form->getId() ?>">

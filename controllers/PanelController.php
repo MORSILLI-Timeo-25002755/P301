@@ -46,9 +46,10 @@ class PanelController
                 } elseif (mb_strlen($name) > 50) {
                     $error = 'Le nom du sondage ne peut pas dépasser 50 caractères.';
                 } else {
-                    if ($formRepository->createForm($name, $user->getId())) {
-                        $_SESSION['flash_message'] = 'Le sondage "' . $name . '" a été créé avec succès !';
-                        header('Location: /panel');
+                    $newFormId = $formRepository->createForm($name, $user->getId());
+                    if ($newFormId !== false && $newFormId > 0) {
+                        $_SESSION['flash_message'] = 'Le sondage "' . $name . '" a été créé avec succès ! Ajoutez maintenant vos questions.';
+                        header('Location: /survey/edit?id=' . $newFormId);
                         exit;
                     } else {
                         $error = 'Une erreur est survenue lors de la création du sondage.';

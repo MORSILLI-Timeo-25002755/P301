@@ -9,9 +9,16 @@ $routes = [
     '/login'     => \Controllers\LoginController::class,
     '/register'  => \Controllers\RegisterController::class,
     '/forgot'    => \Controllers\ForgotPasswordController::class,
-    '/panel'     => \Controllers\PanelController::class,
-    '/dashboard' => \Controllers\PanelController::class,
-    '/logout'    => \Controllers\LogoutController::class
+    '/panel'         => \Controllers\PanelController::class,
+    '/dashboard'     => \Controllers\PanelController::class,
+    '/logout'        => \Controllers\LogoutController::class,
+    '/surveys'       => \Controllers\SurveyListController::class,
+    '/survey/create' => \Controllers\SurveyCreateController::class,
+    '/survey/edit'   => \Controllers\SurveyEditController::class,
+    '/survey/vote'   => \Controllers\SurveyVoteController::class,
+    '/vote'          => \Controllers\SurveyVoteController::class,
+    '/survey/stats'  => \Controllers\SurveyStatsController::class,
+    '/stats'         => \Controllers\SurveyStatsController::class
 ];
 
 $path = rtrim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/') ?: '/';
@@ -28,24 +35,28 @@ try {
     (new \Views\Error('Erreur',$e->getMessage()))->show();
 }
 
-function begin_page($title, $style): void {
-    ?>
-    <!doctype html>
-    <html lang="fr">
-    <head>
-        <meta charset="UTF-8">
-        <link rel="stylesheet" href="_assets/css/index.css">
-        <link rel="stylesheet" href="<?=$style?>">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title><?=$title?></title>
-    </head>
-    <body>
-    <?php
+if (!function_exists('begin_page')) {
+    function begin_page($title, $style): void {
+        ?>
+        <!doctype html>
+        <html lang="fr">
+        <head>
+            <meta charset="UTF-8">
+            <link rel="stylesheet" href="/_assets/css/index.css">
+            <link rel="stylesheet" href="/<?=ltrim($style, '/')?>">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <title><?=$title?></title>
+        </head>
+        <body>
+        <?php
+    }
 }
 
-function end_page(): void {
-    ?>
-    </body>
-    </html>
-    <?php
+if (!function_exists('end_page')) {
+    function end_page(): void {
+        ?>
+        </body>
+        </html>
+        <?php
+    }
 }

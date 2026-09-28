@@ -28,6 +28,10 @@ class Homepage
                             Accéder à mon tableau de bord
                         </a>
 
+                        <a href="/surveys" class="button button-secondary">
+                            Explorer les sondages
+                        </a>
+
                         <a href="/logout" class="button button-secondary">
                             Se déconnecter
                         </a>

@@ -16,14 +16,15 @@ class FormRepository
     public function getFormsByUserId(int $userId): array
     {
         $statement = $this->run(
-            'SELECT f.id_form, f.name, f.id_user,
+            'SELECT f.id_form, f.name, f.id_user, u.username AS author_username,
                     COUNT(DISTINCT q.id_question) AS questions_count,
                     COUNT(DISTINCT a.id_answer) AS answers_count
              FROM Form f
+             LEFT JOIN Users u ON u.id_user = f.id_user
              LEFT JOIN Question q ON q.id_form = f.id_form
              LEFT JOIN Answer a ON a.id_question = q.id_question
              WHERE f.id_user = :userId
-             GROUP BY f.id_form, f.name, f.id_user
+             GROUP BY f.id_form, f.name, f.id_user, u.username
              ORDER BY f.id_form DESC',
             [':userId' => $userId]
         );
@@ -35,24 +36,103 @@ class FormRepository
                 $row->name,
                 (int)$row->id_user,
                 (int)$row->questions_count,
-                (int)$row->answers_count
+                (int)$row->answers_count,
+                $row->author_username ?? null
             );
         }
 
         return $forms;
     }
 
-    public function createForm(string $name, int $userId): bool
+    public function getFormById(int $formId): ?Form
+    {
+        $statement = $this->run(
+            'SELECT f.id_form, f.name, f.id_user, u.username AS author_username,
+                    COUNT(DISTINCT q.id_question) AS questions_count,
+                    COUNT(DISTINCT a.id_answer) AS answers_count
+             FROM Form f
+             LEFT JOIN Users u ON u.id_user = f.id_user
+             LEFT JOIN Question q ON q.id_form = f.id_form
+             LEFT JOIN Answer a ON a.id_question = q.id_question
+             WHERE f.id_form = :formId
+             GROUP BY f.id_form, f.name, f.id_user, u.username',
+            [':formId' => $formId]
+        );
+
+        $row = $statement->fetch(PDO::FETCH_OBJ);
+        if ($row === false) {
+            return null;
+        }
+
+        return new Form(
+            (int)$row->id_form,
+            $row->name,
+            (int)$row->id_user,
+            (int)$row->questions_count,
+            (int)$row->answers_count,
+            $row->author_username ?? null
+        );
+    }
+
+    /**
+     * @return Form[]
+     */
+    public function getAllAvailableForms(): array
+    {
+        $statement = $this->run(
+            'SELECT f.id_form, f.name, f.id_user, u.username AS author_username,
+                    COUNT(DISTINCT q.id_question) AS questions_count,
+                    COUNT(DISTINCT a.id_answer) AS answers_count
+             FROM Form f
+             LEFT JOIN Users u ON u.id_user = f.id_user
+             LEFT JOIN Question q ON q.id_form = f.id_form
+             LEFT JOIN Answer a ON a.id_question = q.id_question
+             GROUP BY f.id_form, f.name, f.id_user, u.username
+             ORDER BY f.id_form DESC'
+        );
+
+        $forms = [];
+        while ($row = $statement->fetch(PDO::FETCH_OBJ)) {
+            $forms[] = new Form(
+                (int)$row->id_form,
+                $row->name,
+                (int)$row->id_user,
+                (int)$row->questions_count,
+                (int)$row->answers_count,
+                $row->author_username ?? null
+            );
+        }
+
+        return $forms;
+    }
+
+    public function createForm(string $name, int $userId): int|false
     {
         try {
-            $this->run(
-                'INSERT INTO Form (name, id_user) VALUES (:name, :userId)',
+            $pdo = $this->dbConnection->getConnection();
+            $stmt = $pdo->prepare('INSERT INTO Form (name, id_user) VALUES (:name, :userId)');
+            $stmt->execute([
+                ':name' => $name,
+                ':userId' => $userId
+            ]);
+            return (int)$pdo->lastInsertId();
+        } catch (\PDOException $e) {
+            return false;
+        }
+    }
+
+    public function updateFormName(int $formId, string $name, int $userId): bool
+    {
+        try {
+            $statement = $this->run(
+                'UPDATE Form SET name = :name WHERE id_form = :formId AND id_user = :userId',
                 [
                     ':name' => $name,
+                    ':formId' => $formId,
                     ':userId' => $userId
                 ]
             );
-            return true;
+            return $statement->rowCount() > 0;
         } catch (\PDOException $e) {
             return false;
         }
