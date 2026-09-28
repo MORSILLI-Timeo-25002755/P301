@@ -12,6 +12,15 @@ class LoginController
 {
     public function execute(): void
     {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        if (isset($_SESSION['user_id'])) {
+            header('Location: /panel');
+            exit;
+        }
+
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             (new Login())->show();
             return;
@@ -28,10 +37,9 @@ class LoginController
             return;
         }
 
-        session_start();
         $_SESSION['user_id'] = $user->getId();
 
-        header('Location: /');
+        header('Location: /panel');
         exit;
     }
 }

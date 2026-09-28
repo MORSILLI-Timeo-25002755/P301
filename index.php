@@ -1,11 +1,17 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 require '_assets/includes/autoloader.php';
 
 $routes = [
-    '/'      => \Controllers\Homepage::class,
-    '/login' => \Controllers\LoginController::class,
-    '/register' => \Controllers\RegisterController::class,
-    '/forgot' => \Controllers\ForgotPasswordController::class
+    '/'          => \Controllers\Homepage::class,
+    '/login'     => \Controllers\LoginController::class,
+    '/register'  => \Controllers\RegisterController::class,
+    '/forgot'    => \Controllers\ForgotPasswordController::class,
+    '/panel'     => \Controllers\PanelController::class,
+    '/dashboard' => \Controllers\PanelController::class,
+    '/logout'    => \Controllers\LogoutController::class
 ];
 
 $path = rtrim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/') ?: '/';

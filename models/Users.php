@@ -4,10 +4,12 @@ namespace models;
 
 class Users
 {
-    public function __construct(private int $id,
-                                private string $email,
-                                private ?string $resetTokenExpiry = null)
-    {}
+    public function __construct(
+        private int $id,
+        private string $email,
+        private ?string $username = null,
+        private ?string $resetTokenExpiry = null
+    ) {}
 
     public function getId(): int
     {
@@ -17,6 +19,11 @@ class Users
     public function getEmail(): string
     {
         return $this->email;
+    }
+
+    public function getUsername(): ?string
+    {
+        return $this->username;
     }
 
     public function hasValidResetToken(): bool

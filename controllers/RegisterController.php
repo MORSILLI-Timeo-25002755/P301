@@ -10,6 +10,15 @@ class RegisterController
 {
     public function execute(): void
     {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        if (isset($_SESSION['user_id'])) {
+            header('Location: /panel');
+            exit;
+        }
+
         try {
             $userRepository = new UserRepository(new DatabaseConnection());
         } catch (PDOException $e) {

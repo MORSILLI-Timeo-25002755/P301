@@ -23,13 +23,23 @@ class Homepage
                 </p>
 
                 <nav aria-label="Actions principales">
-                    <a href="/register" class="button button-primary">
-                        Créer un compte
-                    </a>
+                    <?php if (isset($_SESSION['user_id'])): ?>
+                        <a href="/panel" class="button button-primary">
+                            Accéder à mon tableau de bord
+                        </a>
 
-                    <a href="/login" class="button button-secondary">
-                        Se connecter
-                    </a>
+                        <a href="/logout" class="button button-secondary">
+                            Se déconnecter
+                        </a>
+                    <?php else: ?>
+                        <a href="/register" class="button button-primary">
+                            Créer un compte
+                        </a>
+
+                        <a href="/login" class="button button-secondary">
+                            Se connecter
+                        </a>
+                    <?php endif; ?>
                 </nav>
             </header>
 

@@ -1,0 +1,361 @@
+/* ==========================================================================
+   Panel User Stylesheet
+   ========================================================================== */
+
+/* Navbar */
+.navbar {
+    background: white;
+    border-bottom: 1px solid #e2e8f0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.navbar-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 16px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-brand {
+    font-size: 20px;
+    font-weight: normal;
+    color: #0f172a;
+    text-decoration: none;
+}
+
+.navbar-brand strong {
+    color: #4f46e5;
+}
+
+.navbar-user {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.user-greeting {
+    font-size: 14px;
+    color: #475569;
+}
+
+.user-greeting strong {
+    color: #0f172a;
+}
+
+.button-logout {
+    padding: 8px 14px;
+    background: white;
+    color: #475569;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: bold;
+    transition: background 0.15s, border-color 0.15s;
+}
+
+.button-logout:hover {
+    background: #f1f5f9;
+    border-color: #94a3b8;
+    color: #0f172a;
+}
+
+/* Layout container */
+.panel-container {
+    max-width: 1000px;
+    margin: 32px auto 80px;
+    padding: 0 20px;
+}
+
+/* Flash alerts */
+.alert {
+    padding: 14px 18px;
+    border-radius: 8px;
+    margin-bottom: 24px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.alert-success {
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    color: #16a34a;
+}
+
+.alert-error {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #dc2626;
+}
+
+/* Panel Header */
+.panel-header {
+    margin-bottom: 32px;
+}
+
+.badge {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    background: #e0e7ff;
+    color: #4338ca;
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.panel-header h1 {
+    font-size: 32px;
+    color: #0f172a;
+    margin-bottom: 8px;
+}
+
+.panel-header .description {
+    color: #64748b;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* Stats grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.stat-card {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 20px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.stat-label {
+    font-size: 13px;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+}
+
+.stat-value {
+    font-size: 28px;
+    font-weight: bold;
+    color: #4f46e5;
+}
+
+.stat-user {
+    font-size: 16px;
+    color: #1e293b;
+    word-break: break-all;
+    font-weight: 600;
+}
+
+/* Common Card style */
+.card {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 28px;
+    margin-bottom: 32px;
+}
+
+.card h2 {
+    font-size: 20px;
+    color: #0f172a;
+    margin-bottom: 6px;
+}
+
+.section-desc {
+    color: #64748b;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+/* Create Form */
+.create-form .form-row {
+    display: flex;
+    gap: 12px;
+}
+
+.create-form input[type="text"] {
+    flex: 1;
+    padding: 12px 16px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font: inherit;
+    font-size: 15px;
+    transition: border-color 0.15s, outline 0.15s;
+}
+
+.create-form input[type="text"]:focus {
+    outline: 2px solid #4f46e5;
+    border-color: #4f46e5;
+}
+
+.button-primary {
+    padding: 12px 24px;
+    border: 0;
+    border-radius: 6px;
+    background: #4f46e5;
+    color: white;
+    font: inherit;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.15s;
+}
+
+.button-primary:hover {
+    background: #4338ca;
+}
+
+/* Forms Section Header */
+.forms-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.badge-count {
+    padding: 4px 10px;
+    border-radius: 12px;
+    background: #f1f5f9;
+    color: #475569;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 48px 20px;
+    background: #f8fafc;
+    border: 1px dashed #cbd5e1;
+    border-radius: 8px;
+}
+
+.empty-icon {
+    font-size: 40px;
+    margin-bottom: 12px;
+}
+
+.empty-title {
+    font-size: 17px;
+    font-weight: bold;
+    color: #1e293b;
+    margin-bottom: 6px;
+}
+
+.empty-desc {
+    color: #64748b;
+    font-size: 14px;
+}
+
+/* Forms list */
+.forms-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.survey-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 20px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.survey-card:hover {
+    border-color: #cbd5e1;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+}
+
+.survey-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #0f172a;
+    margin-bottom: 6px;
+}
+
+.survey-meta {
+    font-size: 13px;
+    color: #64748b;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.meta-separator {
+    color: #cbd5e1;
+}
+
+.button-danger {
+    padding: 8px 14px;
+    background: #fee2e2;
+    color: #dc2626;
+    border: 1px solid #fecaca;
+    border-radius: 6px;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.button-danger:hover {
+    background: #fca5a5;
+    color: #b91c1c;
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+    .navbar-container {
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+    }
+
+    .navbar-user {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .panel-header h1 {
+        font-size: 26px;
+    }
+
+    .create-form .form-row {
+        flex-direction: column;
+    }
+
+    .button-primary {
+        width: 100%;
+    }
+
+    .survey-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+    }
+
+    .survey-actions {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+    }
+}
