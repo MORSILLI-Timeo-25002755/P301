@@ -6,7 +6,7 @@ class Users
 {
     public function __construct(private int $id,
                                 private string $email,
-                                private string $password)
+                                private ?string $resetTokenExpiry = null)
     {}
 
     public function getId(): int
@@ -17,5 +17,11 @@ class Users
     public function getEmail(): string
     {
         return $this->email;
+    }
+
+    public function hasValidResetToken(): bool
+    {
+        return $this->resetTokenExpiry !== null
+            && strtotime($this->resetTokenExpiry) >= time();
     }
 }

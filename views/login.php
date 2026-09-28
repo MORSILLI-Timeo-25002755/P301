@@ -18,6 +18,7 @@ class Login
             <input type="password" name="password" required>
 
             <button type="submit">Se connecter</button>
+            <a href="/forgot" class="forgot-link">Mot de passe oublié ?</a>
         </form>
         <?php
     }

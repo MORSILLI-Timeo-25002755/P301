@@ -34,6 +34,31 @@ class UserRepository
         }
     }
 
+    public function findByEmail(string $email): ?Users
+    {
+        $statement = $this->run(
+            'SELECT id_user, email FROM Users WHERE email = :email',
+            [':email' => $email]
+        );
+        $row = $statement->fetch(PDO::FETCH_OBJ);
+
+        return new Users($row->id_user, $row->email);
+    }
+
+    public function findByResetToken(string $tokenHash): ?Users
+    {
+        $statement = $this->run(
+            'SELECT id_user, email, reset_token_expiry FROM Users WHERE reset_token = :tokenHash',
+            [':tokenHash' => $tokenHash]
+        );
+        $row = $statement->fetch(PDO::FETCH_OBJ);
+
+        if ($row === false) {
+            return null;
+        }
+
+        return new Users($row->id_user, $row->email, $row->reset_token_expiry);
+    }
     public function checkLogin($email, $password): ?Users
     {
         $statement = $this->run(
@@ -47,7 +72,23 @@ class UserRepository
             return null;
         }
 
-        return new Users($row->id_user, $row->email, $row->password);
+        return new Users($row->id_user, $row->email);
+    }
+
+    public function setResetToken(int $id, string $tokenHash, string $expiry): void
+    {
+        $this->run(
+            'UPDATE Users SET reset_token = :token, reset_token_expiry = :expiry WHERE id_user = :id',
+            [':token' => $tokenHash, ':expiry' => $expiry, ':id' => $id]
+        );
+    }
+
+    public function updatePassword(int $id, string $passwordHash): void
+    {
+        $this->run(
+            'UPDATE Users SET password = :password, reset_token = NULL, reset_token_expiry = NULL WHERE id_user = :id',
+            [':password' => $passwordHash, ':id' => $id]
+        );
     }
 
     private function run(string $sql, array $params): PDOStatement
