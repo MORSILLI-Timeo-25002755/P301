@@ -2,7 +2,7 @@
 
 namespace Views;
 
-class forgotPassword
+class ForgotPassword
 {
     public function __construct(
         private ?string $token = null,

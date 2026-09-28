@@ -9,7 +9,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use Views\Error;
 use Views\forgotPassword;
 
-class forgotPasswordController
+class ForgotPasswordController
 {
     public function execute(): void
     {
