@@ -27,7 +27,7 @@ class DatabaseConnection {
             $this->pdo->exec("set character set utf8");
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch(PDOException $e) {
-            (new \Views\Error('Connection failed: ' . $e->getMessage()))->show();
+            (new \Views\Error('Erreur: BDD','Connection failed: ' . $e->getMessage()))->show();
         }
     }
 

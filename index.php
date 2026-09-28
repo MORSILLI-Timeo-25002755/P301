@@ -12,13 +12,13 @@ $path = rtrim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/') ?: '/';
 try {
     if (!isset($routes[$path])) {
         http_response_code(404);
-        (new \Views\Error('Page introuvable'))->show();
+        (new \Views\Error('Erreur 404','Page introuvable'))->show();
         exit;
     }
     (new $routes[$path]())->execute();
     end_page();
 } catch (\Exceptions\ControllerException $e) {
-    (new \Views\Error($e->getMessage()))->show();
+    (new \Views\Error('Erreur',$e->getMessage()))->show();
 }
 
 function begin_page($title, $style): void {

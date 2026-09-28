@@ -13,7 +13,7 @@ class RegisterController
         try {
             $userRepository = new UserRepository(new DatabaseConnection());
         } catch (PDOException $e) {
-            (new \Views\Error("Connexion à la base de donnée impossible"))->show();
+            (new \Views\Error("Erreur: BDD", "Connexion à la base de donnée impossible"))->show();
             return;
         }
         $notFilled = false;
@@ -35,7 +35,7 @@ class RegisterController
                     header('Location: /login');
                     exit;
                 } else {
-                    (new \Views\Error('Email ou username déjà utilisé'))->show();
+                    (new \Views\Error('Erreur: Connexion','Email ou username déjà utilisé'))->show();
                 }
                 return;
             }

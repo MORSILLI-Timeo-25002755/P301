@@ -5,7 +5,7 @@ namespace Views;
 class Error
 {
 
-    public function __construct(private readonly String $message)
+    public function __construct(private readonly String $title, private readonly String $message)
     {
     }
 
@@ -15,7 +15,7 @@ class Error
         ?>
         <main>
             <section class="error">
-                <h1>Erreur</h1>
+                <h1><?=$this->title?></h1>
                 <p><?= htmlspecialchars($this->message) ?></p>
                 <a class="button" href="/">Retour à l'accueil</a>
             </section>

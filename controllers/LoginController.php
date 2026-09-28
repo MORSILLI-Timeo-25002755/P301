@@ -24,7 +24,7 @@ class LoginController
         $user = $userRepository->checkLogin($email, $password);
 
         if ($user === null) {
-            (new Error('Mot de passe ou email incorrect'))->show();
+            (new Error('Erreur: Connexion', 'Mot de passe ou email incorrect'))->show();
             return;
         }
 
