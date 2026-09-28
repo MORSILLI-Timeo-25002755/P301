@@ -1,17 +1,27 @@
 <?php
-namespace Views; // PSR-12: head blocks must be separated by a single blank line
-class Error { // PSR-12: opening brace next line
 
+namespace Views;
+
+class Error
+{
     public $message;
 
-    public function __construct($message) {
+    public function __construct($message)
+    {
         $this->message = $message;
     }
 
-    public function show(): void { // PSR-12: opening brace next line
-        begin_page('Erreur','_assets/css/error.css');
+    public function show(): void
+    {
+        begin_page('Erreur', '_assets/css/error.css');
         ?>
-        <h1>Erreur: <?=$this->message?></h1>
-<?php
+        <main>
+            <section class="error">
+                <h1>Erreur</h1>
+                <p><?= htmlspecialchars($this->message) ?></p>
+                <a class="button" href="/">Retour à l'accueil</a>
+            </section>
+        </main>
+        <?php
     }
 }
