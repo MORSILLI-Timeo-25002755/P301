@@ -31,7 +31,7 @@ class LoginController
         session_start();
         $_SESSION['user_id'] = $user->getId();
 
-        header('Location: /');
+        header('Location: /member/dashboard');
         exit;
     }
 }

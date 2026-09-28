@@ -37,18 +37,29 @@ class UserRepository
     public function findByEmail(string $email): ?Users
     {
         $statement = $this->run(
-            'SELECT id_user, email FROM Users WHERE email = :email',
+            'SELECT id_user, email, username FROM Users WHERE email = :email',
             [':email' => $email]
         );
         $row = $statement->fetch(PDO::FETCH_OBJ);
 
-        return new Users($row->id_user, $row->email);
+        return new Users($row->id_user, $row->email, $row->username);
+    }
+
+    public function findById(int $id): ?Users
+    {
+        $statement = $this->run(
+            'SELECT id_user, email, username FROM Users WHERE id_user = :id_user',
+            [':id_user' => $id]
+        );
+        $row = $statement->fetch(PDO::FETCH_OBJ);
+
+        return new Users($row->id_user, $row->email, $row->username);
     }
 
     public function findByResetToken(string $tokenHash): ?Users
     {
         $statement = $this->run(
-            'SELECT id_user, email, reset_token_expiry FROM Users WHERE reset_token = :tokenHash',
+            'SELECT id_user, email, username, reset_token_expiry FROM Users WHERE reset_token = :tokenHash',
             [':tokenHash' => $tokenHash]
         );
         $row = $statement->fetch(PDO::FETCH_OBJ);
@@ -57,7 +68,7 @@ class UserRepository
             return null;
         }
 
-        return new Users($row->id_user, $row->email, $row->reset_token_expiry);
+        return new Users($row->id_user, $row->email, $row->username, $row->reset_token_expiry);
     }
     public function checkLogin($email, $password): ?Users
     {
