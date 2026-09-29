@@ -1,18 +1,16 @@
 <?php
 
-namespace Views\Member;
+namespace views\member;
 
 
-class Dashboard
+readonly class Dashboard
 {
-    public function __construct(private string $username) {
-    }
+    public function __construct(private string $username) {}
 
     public function show(): void
     {
-        $rename = $this->username . '\' dashboard';
-        begin_page($rename, '_assets/css/index.css');
+        begin_page($this->username . '\'s dashboard', '/_assets/css/dashboard.css');
         ?>
-<p>Bonjour <?=$this->username?> </p>
+        <h1>Hello, <?=$this->username?> !</h1>
     <?php }
 }

@@ -73,7 +73,7 @@ class UserRepository
     public function checkLogin($email, $password): ?Users
     {
         $statement = $this->run(
-            'SELECT id_user, email, password FROM Users WHERE email = :email',
+            'SELECT id_user, email, username, password FROM Users WHERE email = :email',
             [':email' => $email]
         );
 
@@ -83,7 +83,7 @@ class UserRepository
             return null;
         }
 
-        return new Users($row->id_user, $row->email);
+        return new Users($row->id_user, $row->email, $row->username);
     }
 
     public function setResetToken(int $id, string $tokenHash, string $expiry): void

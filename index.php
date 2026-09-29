@@ -6,7 +6,7 @@ $routes = [
     '/login' => \Controllers\LoginController::class,
     '/register' => \Controllers\RegisterController::class,
     '/forgot' => \Controllers\ForgotPasswordController::class,
-    '/member/dashboard' => \Controllers\Member\DashboardController::class,
+    '/member/dashboard' => \controllers\member\DashboardController::class,
 ];
 
 $path = rtrim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/') ?: '/';
@@ -29,15 +29,25 @@ function begin_page($title, $style, $navbar = true): void {
     <html lang="fr">
     <head>
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="_assets/css/index.css">
+        <link rel="stylesheet" href="/_assets/css/index.css">
         <link rel="stylesheet" href="<?=$style?>">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title><?=$title?></title>
     </head>
     <body>
     <?php if ($navbar) {
-        $currentPage = $_SERVER['REQUEST_URI']
-        ?>
+        $currentPage = $_SERVER['REQUEST_URI'];
+        $pattern = '#^/member/.*$#';
+        if (preg_match($pattern, $currentPage)) { ?>
+            <nav class="navbar">
+            <ul class="nav-links">
+                <li><a href="/member/dashboard" class="<?php echo ($currentPage == '/member/dashboard') ? 'active' : ''; ?>">Dashboard</a></li>
+                <li><a href="/member/dashboard" class="<?php #echo ($currentPage == '/login') ? 'active' : ''; ?>" >Mes sondages</a></li>
+                <li><a href="/member/dashboard" class="<?php #echo ($currentPage == '/register') ? 'active' : ''; ?>">Recherche</a></li>
+            </ul>
+            </nav>
+            <?php }
+        else {?>
     <nav class="navbar">
         <ul class="nav-links">
             <li><a href="/", class="<?php echo ($currentPage == '/') ? 'active' : ''; ?>">Accueil</a></li>
@@ -45,7 +55,8 @@ function begin_page($title, $style, $navbar = true): void {
             <li><a href="/register" class="<?php echo ($currentPage == '/register') ? 'active' : ''; ?>">Inscription</a></li>
         </ul>
     </nav>
-    <?php }
+            <?php }
+    }
 }
 
 function end_page(): void {

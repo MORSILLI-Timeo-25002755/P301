@@ -1,14 +1,14 @@
 <?php
 
-namespace Controllers\Member;
+namespace controllers\member;
 
 require_once "_assets\includes\auth.php";
 
 use _Assets\Includes\DatabaseConnection;
 use models\UserRepository;
-use Views\Member\Dashboard;
+use views\member\Dashboard;
 
-class dashboardController
+class DashboardController
 {
     public function execute(): void
     {
@@ -19,7 +19,6 @@ class dashboardController
 
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             (new Dashboard($username))->show();
-            return;
         }
     }
 }
