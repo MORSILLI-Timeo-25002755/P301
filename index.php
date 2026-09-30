@@ -11,6 +11,11 @@ $routes = [
 
 $path = rtrim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/') ?: '/';
 
+if ($path === '/member') {
+    header('Location: /member/dashboard', true, 301);
+    exit;
+}
+
 try {
     if (!isset($routes[$path])) {
         http_response_code(404);
