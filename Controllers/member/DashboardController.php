@@ -2,9 +2,9 @@
 
 namespace controllers\member;
 
-require_once "_assets\includes\auth.php";
+require_once "_assets\Includes\auth.php";
 
-use _Assets\Includes\DatabaseConnection;
+use _assets\Includes\DatabaseConnection;
 use models\UserRepository;
 use views\member\Dashboard;
 

@@ -5,7 +5,7 @@ namespace models;
 use models\Users;
 use PDO;
 use PDOStatement;
-use _Assets\Includes\DatabaseConnection;
+use _assets\Includes\DatabaseConnection;
 
 class UserRepository
 {

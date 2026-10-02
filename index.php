@@ -1,12 +1,12 @@
 <?php
-require '_assets/includes/autoloader.php';
+require '_assets/Includes/autoloader.php';
 
 $routes = [
     '/'      => \Controllers\Homepage::class,
     '/login' => \Controllers\LoginController::class,
     '/register' => \Controllers\RegisterController::class,
     '/forgot' => \Controllers\ForgotPasswordController::class,
-    '/member/dashboard' => \controllers\member\DashboardController::class,
+    '/member/dashboard' => \Controllers\member\DashboardController::class,
 ];
 
 $path = rtrim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/') ?: '/';

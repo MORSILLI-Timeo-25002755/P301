@@ -3,7 +3,7 @@
 namespace Controllers;
 
 use \Models\UserRepository;
-use _Assets\Includes\DatabaseConnection;
+use _assets\Includes\DatabaseConnection;
 use PDOException;
 
 class RegisterController
