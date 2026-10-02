@@ -6,6 +6,7 @@ require_once "_assets\includes\auth.php";
 
 use _Assets\Includes\DatabaseConnection;
 use models\UserRepository;
+use PDOException;
 use views\member\Dashboard;
 
 class DashboardController
@@ -15,10 +16,14 @@ class DashboardController
         session_start();
 
         $userRepository = new UserRepository(new DatabaseConnection());
-        $username = $userRepository->findById($_SESSION['user_id'])->getUsername();
+        if ($_SESSION['user_id']) {
+            $username = $userRepository->findById($_SESSION['user_id'])->getUsername();
 
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            (new Dashboard($username))->show();
+            if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+                (new Dashboard($username))->show();
+            }
+        } else {
+            header('Location: /login');
         }
     }
 }
