@@ -51,5 +51,16 @@ readonly class Dashboard
                 <input type="submit" name="send" value="Créer le sondage">
             </form>
         </section>
+
+        <section>
+            <header>
+                <h3>Mes sondages</h3>
+                <div><?php ?></div>
+            </header>
+
+            <main>
+                <?php ?>
+            </main>
+        </section>
     <?php }
 }
