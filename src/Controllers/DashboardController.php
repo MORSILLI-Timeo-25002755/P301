@@ -2,14 +2,16 @@
 
 namespace Controllers;
 
-use \_assets\Includes\DatabaseConnection;
+use \_assets\Includes\HandleSessionActive;
 use \Views\Dashboard;
 use \Models\UserRepository;
 
-class DashboardController extends DatabaseController
+class DashboardController extends HandleSessionActive
 {
     public function execute(): void
     {
+        parent::__construct();
+
         $this->requireLogin();
 
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
