@@ -12,16 +12,32 @@ class DashboardController
     {
         session_start();
 
-        $userRepository = new UserRepository(new DatabaseConnection());
-
         if(isset($_SESSION['user_id'])) {
-            $username = $userRepository->findById($_SESSION['user_id'])->getUsername();
+            try {
 
-            if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-                (new Dashboard($username))->show();
+                $db = new DatabaseConnection();
+                $userRepository = new UserRepository($db);
+
+                $user = $userRepository->findById($_SESSION['user_id']);
+
+                if (!$user) {
+                    session_destroy();
+                    (new \Views\Error('Erreur utilisateur', 'L\'utilisateur n\'existe pas'))->show();
+                }
+
+                $username = $user->getUsername();
+
+                if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+                    (new Dashboard($username))->show();
+                } else {
+                (new \Views\Error('Erreur connexion', "Vous n'êtes pas connecté"))->show();
+            }
+            }catch (\Exception $e) {
+                (new \Views\Error('Erreur système', "Une erreur est survenue lors du chargement de votre tableau de bord."))->show();
             }
         } else {
             (new \Views\Error('Erreur connexion', "Vous n'êtes pas connecté"))->show();
         }
+
     }
 }
