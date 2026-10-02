@@ -1,6 +1,6 @@
 <?php
 
-namespace _assets\includes;
+namespace _Assets\Includes;
 
 use Controllers\DatabaseController;
 use Models\UserRepository;
