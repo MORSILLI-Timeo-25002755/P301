@@ -1,10 +1,10 @@
 <?php
 
-namespace _assets\includes;
+namespace _assets\Includes;
 
-use Controllers\DatabaseController;
-use Models\UserRepository;
-use Models\Users;
+use \Controllers\DatabaseController;
+use \Models\UserRepository;
+use \Models\Users;
 
 abstract class HandleSessionActive extends DatabaseController
 {

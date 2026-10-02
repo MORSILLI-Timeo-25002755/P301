@@ -42,13 +42,12 @@ function begin_page($title, $style, $navbar = true): void {
     <body>
     <?php if ($navbar) {
         $currentPage = $_SERVER['REQUEST_URI'];
-        $pattern = '#^/member/.*$#';
-        if (preg_match($pattern, $currentPage)) { ?>
+        if (isset($_SESSION['user_id'])) { ?>
             <nav class="navbar">
             <ul class="nav-links">
-                <li><a href="/member/dashboard" class="<?php echo ($currentPage == '/member/dashboard') ? 'active' : ''; ?>">Dashboard</a></li>
-                <li><a href="/member/dashboard" class="<?php #echo ($currentPage == '/login') ? 'active' : ''; ?>" >Mes sondages</a></li>
-                <li><a href="/member/dashboard" class="<?php #echo ($currentPage == '/register') ? 'active' : ''; ?>">Recherche</a></li>
+                <li><a href="/dashboard" class="<?php echo ($currentPage == '/dashboard') ? 'active' : ''; ?>">Dashboard</a></li>
+                <li><a href="/dashboard" class="<?php #echo ($currentPage == '/login') ? 'active' : ''; ?>" >Mes sondages</a></li>
+                <li><a href="/dashboard" class="<?php #echo ($currentPage == '/register') ? 'active' : ''; ?>">Recherche</a></li>
             </ul>
             </nav>
             <?php }
