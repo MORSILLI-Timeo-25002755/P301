@@ -4,11 +4,17 @@ namespace Controllers;
 
 use \_assets\Includes\DatabaseConnection;
 use \Models\UserRepository;
+use Models\Users;
 use \Views\Error;
 use \Views\Login;
 
-class LoginController extends DashboardController
+class LoginController extends DatabaseController
 {
+    private UserRepository $userRepository;
+    public function __construct() {
+        parent::__construct();
+        $this->userRepository = new UserRepository($this->db);
+    }
     public function execute(): void
     {
 
@@ -19,19 +25,19 @@ class LoginController extends DashboardController
 
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             (new Login())->show();
-            return;
+            exit;
         }
 
         $email = strtolower(trim((string)filter_input(INPUT_POST, 'email')));
         $password = (string)filter_input(INPUT_POST, 'password');
-
-        $userRepository = new UserRepository(new DatabaseConnection());
-        $user = $userRepository->checkLogin($email, $password);
+        $user = $this->userRepository->checkLogin($email, $password);
 
         if ($user === null) {
             (new Error('Erreur: Connexion', 'Mot de passe ou email incorrect'))->show();
-            return;
+            exit;
         }
+
+        session_regenerate_id(true);
         $_SESSION['user_id'] = $user->getId();
 
         header('Location: /dashboard');
