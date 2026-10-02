@@ -6,7 +6,7 @@ use _Assets\Includes\DatabaseConnection;
 use Models\UserRepository;
 use Models\Users;
 
-abstract class DatabaseController
+abstract class DatabaseController // Classe parent de toutes les pages web qui requiert une connexion utilisateur pour être atteinte, évite de répéter du code.
 {
     protected DatabaseConnection $db;
     protected ?Users $user;

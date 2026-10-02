@@ -7,10 +7,16 @@ use \Models\UserRepository;
 use \Views\Error;
 use \Views\Login;
 
-class LoginController
+class LoginController extends DashboardController
 {
     public function execute(): void
     {
+
+        if (isset($_SESSION['user_id'])) {
+            header('Location: /dashboard');
+            exit;
+        }
+
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             (new Login())->show();
             return;
@@ -26,8 +32,6 @@ class LoginController
             (new Error('Erreur: Connexion', 'Mot de passe ou email incorrect'))->show();
             return;
         }
-
-        session_start();
         $_SESSION['user_id'] = $user->getId();
 
         header('Location: /dashboard');
