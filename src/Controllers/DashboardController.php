@@ -2,7 +2,7 @@
 
 namespace Controllers;
 
-use _assets\includes\HandleSessionActive;
+use \_assets\Includes\HandleSessionActive;
 use \Views\Dashboard;
 use \Models\UserRepository;
 

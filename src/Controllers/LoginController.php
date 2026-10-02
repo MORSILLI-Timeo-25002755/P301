@@ -2,9 +2,7 @@
 
 namespace Controllers;
 
-use \_assets\Includes\DatabaseConnection;
 use \Models\UserRepository;
-use Models\Users;
 use \Views\Error;
 use \Views\Login;
 
@@ -17,15 +15,18 @@ class LoginController extends DatabaseController
     }
     public function execute(): void
     {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
 
         if (isset($_SESSION['user_id'])) {
             header('Location: /dashboard');
-            exit;
+            return;
         }
 
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             (new Login())->show();
-            exit;
+            return;
         }
 
         $email = strtolower(trim((string)filter_input(INPUT_POST, 'email')));
@@ -34,13 +35,13 @@ class LoginController extends DatabaseController
 
         if ($user === null) {
             (new Error('Erreur: Connexion', 'Mot de passe ou email incorrect'))->show();
-            exit;
+            return;
         }
 
         session_regenerate_id(true);
         $_SESSION['user_id'] = $user->getId();
 
         header('Location: /dashboard');
-        exit;
+        return;
     }
 }

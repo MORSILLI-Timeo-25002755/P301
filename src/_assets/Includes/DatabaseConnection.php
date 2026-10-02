@@ -1,6 +1,6 @@
 <?php
 
-namespace _Assets\Includes;
+namespace _assets\Includes;
 
 use Dotenv\Dotenv;
 use PDO;

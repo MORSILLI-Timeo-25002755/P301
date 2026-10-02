@@ -61,10 +61,10 @@ class ForgotPasswordController extends DatabaseController
 
     private function resetPassword(string $token): void
     {
-        $user = $this->findUserByToken($this->userRepository, $token);
+        $user = $this->findUserByToken($token);
 
         if ($user === null) {
-            (new Error('Ce lien est invalide ou a expiré.'))->show();
+            (new Error('Lien invalide !', 'Ce lien est invalide ou a expiré.'))->show();
             return;
         }
 
@@ -106,7 +106,7 @@ class ForgotPasswordController extends DatabaseController
 
     private function sendResetEmail(string $email, string $token): bool
     {
-        $baseUrl = 'http://localhost:8080';
+        $baseUrl = $_ENV['APP_URL'];
         $resetLink = $baseUrl . '/forgot?token=' . urlencode($token);
 
         $mail = new \PHPMailer\PHPMailer\PHPMailer(true);
@@ -120,7 +120,6 @@ class ForgotPasswordController extends DatabaseController
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
             $mail->Port = "{$_SERVER['SMTP_PORT']}";
 
-            // Destinataires
             $mail->setFrom("{$_SERVER['MAIL_ADDRESS']}", 'ApocalypseHorsemen');
             $mail->addAddress($email);
 
