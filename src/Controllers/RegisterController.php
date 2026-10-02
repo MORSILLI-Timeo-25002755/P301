@@ -6,16 +6,17 @@ use \_assets\Includes\DatabaseConnection;
 use \Models\UserRepository;
 use PDOException;
 
-class RegisterController
+class RegisterController extends DatabaseController
 {
+    private UserRepository $userRepository;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->userRepository = new UserRepository($this->db);
+    }
     public function execute(): void
     {
-        try {
-            $userRepository = new UserRepository(new DatabaseConnection());
-        } catch (PDOException $e) {
-            (new \Views\Error("Erreur: BDD", "Connexion à la base de donnée impossible"))->show();
-            return;
-        }
         $notFilled = false;
         $validPassword = true;
 
@@ -23,15 +24,15 @@ class RegisterController
 
             $email = strtolower(trim((string) filter_input(INPUT_POST, 'email')));
             $username = trim((string) filter_input(INPUT_POST, 'username'));
-            $password = trim((string) filter_input(INPUT_POST, 'pwd'));
+            $password = (string) filter_input(INPUT_POST, 'pwd');
             $confirmation = trim((string) filter_input(INPUT_POST, 'conf'));
 
-            if ($email === '' || $username === '' || $password === '' || $confirmation === '') {
+            if ($email === '' || $username === '' || trim($password) === '' || $confirmation === '') {
                 $notFilled = true;
             } elseif ($password !== $confirmation) {
                 $validPassword = false;
             } else {
-                if($userRepository->insertUser($email, $username, $password)) {
+                if($this->userRepository->insertUser($email, $username, $password)) {
                     header('Location: /login');
                     exit;
                 } else {
