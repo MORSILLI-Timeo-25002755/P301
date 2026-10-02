@@ -1,6 +1,6 @@
 <?php
 namespace views; // PSR-12: head blocks must be separated by a single blank line
-class Homepage { // PSR-12: opening brace next line
+class Example { // PSR-12: opening brace next line
     public function show(): void { // PSR-12: opening brace next line
         ob_start();
         ?><h1>Les derniers billets du blog</h1>
