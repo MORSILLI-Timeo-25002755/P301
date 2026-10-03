@@ -11,7 +11,7 @@ readonly class Dashboard
     {
         begin_page($this->username . '\'s dashboard', '/css/dashboard.css');
         ?>
-        <div>
+        <div class="page-descriptor">
             <h2>Espace utilisateur</h2>
         </div>
 
