@@ -1,0 +1,51 @@
+name: W3C HTML Validation
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate-w3c:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Récupérer le code source
+        uses: actions/checkout@v4
+
+      - name: Configurer l'environnement PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mbstring, intl, pdo
+
+      - name: Installer les dépendances Composer
+        run: |
+          if [ -f composer.json ]; then
+            composer install --no-progress --prefer-dist --optimize-autoloader
+          fi
+
+      - name: Démarrer le serveur PHP en arrière-plan
+        run: |
+          # Remplace 'public' par le dossier contenant ton index.php (ex: public, web, www)
+          php -S 127.0.0.1:8000 -t public > /dev/null 2>&1 &
+          
+          # Attente active que le serveur soit prêt (max 10s)
+          timeout 10 bash -c 'until curl -s http://127.0.0.1:8000 > /dev/null; do sleep 0.5; done'
+
+      - name: Installer Node.js (pour vnu-jar)
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Installer et exécuter le validateur W3C
+        run: |
+          npm install -g vnu-jar
+          
+          # Liste ici les URLs clés de ton MVC à tester
+          vnu \
+            http://127.0.0.1:8000/ \
+            http://127.0.0.1:8000/register \
+            http://127.0.0.1:8000/forgot \
+            http://127.0.0.1:8000/login

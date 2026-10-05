@@ -11,6 +11,9 @@ class Dashboard
     {
         begin_page($this->username . '\'s dashboard', '/css/dashboard.css');
         ?>
+        <p>
+            <p>Bonjour</p>
+        </p>
         <h1>Hello, <?=$this->username?> !</h1>
     <?php }
 }
