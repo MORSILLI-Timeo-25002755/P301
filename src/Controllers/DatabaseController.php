@@ -2,7 +2,7 @@
 
 namespace Controllers;
 
-use _Assets\Includes\DatabaseConnection;
+use _assets\Includes\DatabaseConnection;
 use Models\UserRepository;
 use Models\Users;
 
