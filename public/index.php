@@ -12,6 +12,7 @@ $routes = [
     '/register' => \Controllers\RegisterController::class,
     '/forgot' => \Controllers\ForgotPasswordController::class,
     '/dashboard' => \Controllers\DashboardController::class,
+    '/logout' => \Controllers\LogoutController::class,
 ];
 
 $path = rtrim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/') ?: '/';
@@ -52,6 +53,7 @@ function begin_page($title, $style, $navbar = true): void {
                 <li><a href="/dashboard" class="<?php echo ($currentPage == '/dashboard') ? 'active' : ''; ?>">Dashboard</a></li>
                 <li><a href="/dashboard" class="<?php #echo ($currentPage == '/login') ? 'active' : ''; ?>" >Mes sondages</a></li>
                 <li><a href="/dashboard" class="<?php #echo ($currentPage == '/register') ? 'active' : ''; ?>">Recherche</a></li>
+                <li><a href="/logout" class="button-primary">Déconnexion</a></li>
             </ul>
             </nav>
             <?php }
