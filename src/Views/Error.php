@@ -5,7 +5,7 @@ namespace Views;
 class Error
 {
 
-    public function __construct(private String $title, private String $message, private String $page)
+    public function __construct(private string $title, private string $message, private string $page = '/')
     {
     }
 

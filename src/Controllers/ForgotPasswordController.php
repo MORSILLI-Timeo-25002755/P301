@@ -7,20 +7,20 @@ use \Models\UserRepository;
 use \Models\Users;
 use \Views\Error;
 use \Views\ForgotPassword;
-use PHPMailer\PHPMailer\PHPMailer;;
+use PHPMailer\PHPMailer\PHPMailer;
 
 class ForgotPasswordController extends DatabaseController
 {
     private UserRepository $userRepository;
 
-    public function __construct() {
-        parent::__construct();
-        $this->userRepository = new UserRepository($this->db);
+    public function __construct(?DatabaseConnection $db = null, ?UserRepository $userRepository = null) {
+        parent::__construct($db);
+        $this->userRepository = $userRepository ?? new UserRepository($this->db);
     }
 
     public function execute(): void
     {
-        $token = filter_input(INPUT_POST, 'token') ?: filter_input(INPUT_GET, 'token');
+        $token = $this->getPost('token') ?: $this->getQuery('token');
 
         if (!$token) {
             $this->requestReset();   // étape 1 : demande par email
@@ -37,7 +37,7 @@ class ForgotPasswordController extends DatabaseController
             return;
         }
 
-        $email = strtolower(trim((string) filter_input(INPUT_POST, 'email')));
+        $email = strtolower(trim((string) $this->getPost('email')));
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             (new ForgotPassword(error: 'Veuillez entrer une adresse email valide.'))->show();
@@ -73,8 +73,8 @@ class ForgotPasswordController extends DatabaseController
             return;
         }
 
-        $password = (string) filter_input(INPUT_POST, 'password');
-        $confirm = (string) filter_input(INPUT_POST, 'confirm');
+        $password = (string) $this->getPost('password');
+        $confirm = (string) $this->getPost('confirm');
 
         if ($password !== $confirm) {
             (new ForgotPassword(token: $token, error: 'Les mots de passe ne correspondent pas.'))->show();
@@ -133,7 +133,9 @@ class ForgotPasswordController extends DatabaseController
             $mail->send();
             return true;
         } catch (\PHPMailer\PHPMailer\Exception $e) {
-            error_log('Erreur envoi mail : ' . $mail->ErrorInfo);
+            if (!self::$isTesting) {
+                error_log('Erreur envoi mail : ' . $mail->ErrorInfo);
+            }
             return false;
         }
     }

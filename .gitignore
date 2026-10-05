@@ -1,3 +1,13 @@
 .idea
 .env
 composer.lock
+.phpunit.cache/
+logs/
+vendor/bin/
+vendor/myclabs/
+vendor/nikic/
+vendor/phar-io/
+vendor/phpunit/
+vendor/sebastian/
+vendor/staabm/
+vendor/theseer/

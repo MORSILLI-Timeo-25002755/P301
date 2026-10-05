@@ -6,19 +6,28 @@ use Dotenv\Dotenv;
 use PDO;
 use PDOException;
 
-$dotenv = Dotenv::createImmutable(__DIR__ . '/../../../');
-$dotenv->safeLoad();
+if (class_exists(Dotenv::class) && file_exists(__DIR__ . '/../../../.env')) {
+    $dotenv = Dotenv::createImmutable(__DIR__ . '/../../../');
+    $dotenv->safeLoad();
+}
+
 class DatabaseConnection {
     private string $host;
     private string $user;
     private string $password;
     private string $dbname;
     private PDO $pdo;
-    public function __construct() {
-        $this->host = $_ENV['DB_HOST'];
-        $this->user = $_ENV['DB_USER'];
-        $this->password = $_ENV['DB_PASSWORD'];
-        $this->dbname = $_ENV['DB_DBNAME'];
+
+    public function __construct(?PDO $pdo = null) {
+        if ($pdo !== null) {
+            $this->pdo = $pdo;
+            return;
+        }
+
+        $this->host = $_ENV['DB_HOST'] ?? 'localhost';
+        $this->user = $_ENV['DB_USER'] ?? '';
+        $this->password = $_ENV['DB_PASSWORD'] ?? '';
+        $this->dbname = $_ENV['DB_DBNAME'] ?? '';
         try {
             $dsn = "mysql:host={$this->host};dbname={$this->dbname}";
             $this->pdo = new PDO($dsn, $this->user, $this->password);

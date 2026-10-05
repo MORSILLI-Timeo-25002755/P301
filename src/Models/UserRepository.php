@@ -42,6 +42,10 @@ class UserRepository
         );
         $row = $statement->fetch(PDO::FETCH_OBJ);
 
+        if ($row === false) {
+            return null;
+        }
+
         return new Users($row->id_user, $row->email, $row->username);
     }
 
@@ -52,6 +56,10 @@ class UserRepository
             [':id_user' => $id]
         );
         $row = $statement->fetch(PDO::FETCH_OBJ);
+
+        if ($row === false) {
+            return null;
+        }
 
         return new Users($row->id_user, $row->email, $row->username);
     }
