@@ -1,6 +1,6 @@
 <?php
 
-namespace views;
+namespace Views;
 
 
 readonly class Dashboard
