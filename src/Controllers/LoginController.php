@@ -15,18 +15,21 @@ class LoginController extends DatabaseController
     }
     public function execute(): void
     {
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
 
         if (isset($_SESSION['user_id'])) {
             header('Location: /dashboard');
-            return;
+            exit;
         }
 
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            (new Login())->show();
-            return;
+            $token = $this->generateCsrfToken();
+            (new Login($token))->show();
+            exit;
+        }
+
+        if (!$this->verifyCsrfToken(filter_input(INPUT_POST, 'csrf_token'))){
+            (new Error('ERREUR DE SECURITE', 'Veuillez réessayer', '/login'))->show();
+            exit;
         }
 
         $email = strtolower(trim((string)filter_input(INPUT_POST, 'email')));
@@ -34,14 +37,15 @@ class LoginController extends DatabaseController
         $user = $this->userRepository->checkLogin($email, $password);
 
         if ($user === null) {
-            (new Error('Erreur: Connexion', 'Mot de passe ou email incorrect'))->show();
-            return;
+            $this->logSecurity('CONNEXION ECHOUEE', 'Tentative de connexion');
+            (new Error('Erreur: Connexion', 'Mot de passe ou email incorrect', '/login'))->show();
+            exit;
         }
 
         session_regenerate_id(true);
         $_SESSION['user_id'] = $user->getId();
 
         header('Location: /dashboard');
-        return;
+        exit;
     }
 }

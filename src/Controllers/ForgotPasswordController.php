@@ -64,7 +64,7 @@ class ForgotPasswordController extends DatabaseController
         $user = $this->findUserByToken($token);
 
         if ($user === null) {
-            (new Error('Lien invalide !', 'Ce lien est invalide ou a expiré.'))->show();
+            (new Error('Lien invalide !', 'Ce lien est invalide ou a expiré.', '/forgot'))->show();
             return;
         }
 

@@ -16,6 +16,7 @@ class DashboardController extends HandleSessionActive
 
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             $username = $this->user->getUsername();
+
             (new Dashboard($username))->show();
         }
     }

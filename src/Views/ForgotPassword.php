@@ -6,8 +6,9 @@ class ForgotPassword
     public function __construct(
             private ?string $token = null,
             private ?string $message = null,
-            private ?string $error = null
-    ) {}
+            private ?string $error = null,
+    ) {
+    }
 
     public function show(): void
     {

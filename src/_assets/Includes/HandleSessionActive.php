@@ -24,6 +24,7 @@ abstract class HandleSessionActive extends DatabaseController
     protected function requireLogin(): void
     {
         if (!isset($_SESSION['user_id'])) {
+            $this->logSecurity('ACCÈS REFUSÉ', 'Tentative d\'accès sans session.');
             header('Location: /login');
             exit;
         }
@@ -33,6 +34,7 @@ abstract class HandleSessionActive extends DatabaseController
 
         if (!$this->user) {
             session_destroy();
+            $this->logSecurity('SESSION INVALIDE', "ID {$_SESSION['user_id']} introuvable en base.");
             header('Location: /login');
             exit;
         }
