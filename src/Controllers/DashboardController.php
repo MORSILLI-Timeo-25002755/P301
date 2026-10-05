@@ -13,8 +13,6 @@ class DashboardController extends HandleSessionActive
 {
     public function execute(): void
     {
-        session_start();
-
         parent::__construct();
 
         $this->requireLogin();
@@ -24,7 +22,7 @@ class DashboardController extends HandleSessionActive
             $formRepository = new FormRepository(new DatabaseConnection());
             $answerRepository = new AnswerRepository(new DatabaseConnection());
         } catch (PDOException $e) {
-            (new \Views\Error("Erreur: BDD", "Connexion à la base de donnée impossible"))->show();
+            (new \Views\Error("Erreur: BDD", "Connexion à la base de donnée impossible", "Erreur"))->show();
             return;
         }
 
@@ -52,7 +50,7 @@ class DashboardController extends HandleSessionActive
                 (new Dashboard($username))->show($nb_form, $nb_answer, $user_mail, $infos_form, $page);
             }
         } else {
-            (new \Views\Error('Erreur connexion', "Vous n'êtes pas connecté"))->show();
+            (new \Views\Error('Erreur connexion', "Vous n'êtes pas connecté", $username.'\' dashboard'))->show();
         }
     }
 }
