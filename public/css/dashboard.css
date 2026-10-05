@@ -1,4 +1,330 @@
+:root {
+    --color-primary: #4f46e5;
+    --color-primary-hover: #4338ca;
+    --color-primary-light: #e0e7ff;
+
+    --color-background: #f7f9fc;
+    --color-grey-background: #f6f6fa;
+    --color-surface: #ffffff;
+
+    --color-text: #111827;
+    --color-text-secondary: #64748b;
+    --color-text-descriptor: #4338ca;
+
+    --color-border: #dbe3ef;
+    --color-border-input: #cbd5e1;
+
+    --radius-card: 12px;
+    --radius-input: 9px;
+}
+
+.body {
+    margin-left: 12%;
+    margin-right: 12%;
+    margin-top: 30px;
+}
+
+.dashboard-header {
+    margin-bottom: 48px;
+}
+
 .page-descriptor {
-    padding: 100px 20px;
-    text-align: center;   
+    display: inline-block;
+    padding: 6px 14px;
+    margin-bottom: 14px;
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: 700;
+
+    color: var(--color-text-descriptor);
+    background-color: var(--color-primary-light);
+}
+
+.dashboard-header h1 {
+    margin-bottom: 10px;
+    font-size: 35px;
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.dashboard-header p {
+    font-size: 18px;
+    line-height: 1.6;
+
+    color: var(--color-text-secondary);
+}
+
+.statistical-information {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 48px;
+}
+
+.statistical-information article {
+    padding: 20px 30px;
+
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card);
+}
+
+.statistical-information article h4 {
+    margin-bottom: 6px;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.5;
+    text-transform: uppercase;
+
+    color: var(--color-text-secondary);
+}
+
+.stat-value {
+    font-size: 35px;
+    font-weight: 700;
+    line-height: 1.2;
+
+    color: var(--color-primary);
+}
+
+.account {
+    font-size: 20px;
+    font-weight: 700;
+
+    color: var(--color-text);
+}
+
+.new-survey {
+    display: grid;
+    grid-template-columns: 1fr;
+    margin-bottom: 48px;
+
+    padding: 30px 30px;
+    min-width: 520px;
+
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card);
+}
+
+.new-survey h3 {
+    font-size: 20px;
+    line-height: 1.4;
+}
+
+.new-survey p {
+    margin-bottom: 20px;
+    font-size: 14px;
+    line-height: 1.6;
+
+    color: var(--color-text-secondary);
+}
+
+.new-survey form {
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    gap: 18px;
+    width: 100%;
+}
+
+.new-survey input {
+    height: 50px;
+    padding: 0 24px;
+    font-size: 18px;
+
+    color: var(--color-text);
+    background-color: var(--color-surface);
+
+    border: 1px solid;
+    border-color: var(--color-border-input);
+    border-radius: var(--radius-input);
+}
+
+.new-survey button {
+    padding: 0 20px;
+    font-size: 16px;
+    font-weight: 700;
+
+    color: #ffffff;
+    background-color: var(--color-primary);
+
+    border: none;
+    border-radius: var(--radius-input);
+}
+
+.my-survey {
+    display: grid;
+    grid-template-columns: 1fr;
+    margin-bottom: 48px;
+    padding: 30px 30px;
+    min-width: 520px;
+
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card);
+}
+
+.my-survey header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    gap: 16px;
+}
+
+.my-survey h3 {
+    font-size: 20px;
+}
+
+.surgey-counter {
+    display: flex;
+    align-items: center;
+    padding: 6px 14px;
+    font-size: 10px;
+    font-weight: 800;
+
+    color: var(--color-text-secondary);
+    background-color: var(--color-grey-background);
+
+    border-radius: 999px;
+}
+
+.none-survey {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 50px;
+
+    background-color: var(--color-grey-background);
+    border: 1px dashed var(--color-border);
+    border-radius: var(--radius-card);    
+}
+
+.notepad {
+    font-size: 52px;
+    line-height: 1.2;
+}
+
+.none-survey h5 {
+    margin-bottom: 4px;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+.none-survey p {
+    font-size: 16px;
+    line-height: 1.6;
+
+    color: var(--color-text-secondary);
+}
+
+.survey-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+.survey-element {
+    margin-bottom: 16px;
+    padding: 20px 20px;
+
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card);
+}
+
+.survey-element h5 {
+    margin-bottom: 8px;
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.survey-main-element {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.stat-survey {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 24px;
+    font-size: 14px;
+    line-height: 1.4;
+
+    color: var(--color-text-secondary);
+}
+
+.survey-main-element button {
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: 700;
+
+    color: #ffffff;
+    background-color: var(--color-primary);
+
+    border: none;
+    border-radius: var(--radius-input);
+}
+
+button:hover {
+    background-color: var(--color-primary-hover);
+}
+
+.survey-pagination {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.button-pagination {
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: 700;
+
+    color: #ffffff;
+    background-color: var(--color-primary);
+
+    border: none;
+    border-radius: var(--radius-input);
+}
+
+@media (max-width: 700px) {
+    .new-survey h3 {
+        font-size: 16px;
+    }
+
+    .new-survey p {
+        margin-bottom: 16px;
+        font-size: 12px;
+        line-height: 1.4;
+    }
+
+    .none-survey h5 {
+        font-size: 14px;
+        line-height: 1;
+
+    }
+
+    .none-survey p {
+        font-size: 12px;
+        line-height: 1.4;
+    }
+
+    .survey-element h5 {
+        font-size: 12px;
+    }
+
+    .stat-survey {
+        font-size: 10px;
+    }
+
+    .survey-main-element button {
+        padding: 10px 12px;
+        font-size: 12px;
+    }
 }
