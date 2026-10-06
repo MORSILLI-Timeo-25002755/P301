@@ -81,6 +81,6 @@ class Homepage
                 </article>
             </section>
         </main>
-        <?php
+        <?php end_page();
     }
 }

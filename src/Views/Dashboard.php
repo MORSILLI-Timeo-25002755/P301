@@ -101,5 +101,5 @@ readonly class Dashboard
                 </section>
             </main>
         </main>
-    <?php }
+    <?php  end_page(); }
 }

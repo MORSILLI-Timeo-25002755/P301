@@ -114,6 +114,6 @@ class ForgotPassword
             </section>
         </main>
 
-        <?php
+        <?php end_page();
     }
 }

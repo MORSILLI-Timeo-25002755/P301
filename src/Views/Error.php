@@ -22,6 +22,6 @@ class Error
                 <a class="button" href="/">Accueil</a>
             </section>
         </main>
-        <?php
+        <?php end_page();
     }
 }
