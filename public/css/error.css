@@ -10,19 +10,19 @@ main {
     max-width: 600px;
     padding: 50px 40px;
     text-align: center;
-    background: white;
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card);
 }
 
 .error h1 {
     margin-bottom: 20px;
     font-size: 42px;
-    color: #4f46e5;
+    color: var(--color-primary);
 }
 
 .error p {
-    color: #64748b;
+    color: var(--color-text-secondary);
     font-size: 18px;
     line-height: 1.6;
 }
@@ -31,15 +31,15 @@ main {
     display: inline-block;
     margin-top: 30px;
     padding: 12px 20px;
-    border-radius: 8px;
-    background: #4f46e5;
+    border-radius: var(--radius-card);
+    background: var(--color-primary);
     color: white;
     text-decoration: none;
     font-weight: bold;
 }
 
 .error .button:hover {
-    background: #4338ca;
+    background: var(--color-primary-hover);
 }
 
 @media (max-width: 700px) {

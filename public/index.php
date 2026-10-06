@@ -60,7 +60,7 @@ function begin_page($title, $style, $navbar = true): void {
         else {?>
     <nav class="navbar">
         <ul class="nav-links">
-            <li><a href="/" , class="<?php echo ($currentPage == '/') ? 'active' : ''; ?>">Accueil</a></li>
+            <li><a href="/" class="<?php echo ($currentPage == '/') ? 'active' : ''; ?>">Accueil</a></li>
             <li><a href="/login" class="<?php echo ($currentPage == '/login') ? 'active' : ''; ?>">Connexion</a></li>
             <li><a href="/register" class="<?php echo ($currentPage == '/register') ? 'active' : ''; ?>">Inscription</a></li>
         </ul>
