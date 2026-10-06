@@ -12,7 +12,7 @@ class ForgotPassword
 
     public function show(): void
     {
-        begin_page('Mot de passe oublié', '/css/forgotPassword.css');
+        begin_page('Mot de passe oublié', '/css/forgotPassword.css', noindex: True);
         ?>
 
         <main>

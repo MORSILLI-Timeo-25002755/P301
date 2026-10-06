@@ -6,7 +6,7 @@ class Login
 
     public function __construct(private String $csrfToken) {}
     public function show(): void { // PSR-12: opening brace next line
-        begin_page('Login', '/css/login.css');
+        begin_page('Login', '/css/login.css', noindex: True);
         ?>
         <form method="post" action="/login">
             <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($this->csrfToken, ENT_QUOTES, 'UTF-8') ?>">

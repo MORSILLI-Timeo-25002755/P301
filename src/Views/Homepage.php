@@ -5,7 +5,9 @@ class Homepage
 {
     public function show(): void
     {
-        begin_page('Accueil', '/css/welcome.css', false);
+        begin_page('Accueil', '/css/welcome.css', false,
+                link: "https://apocalypsehorsemen.alwaysdata.net/",
+                description: "HorseForm, créez, partagez et personnalisez vos formulaires en quelques clics. Un outil simple, intuitif et rapide. Lancez-vous !");
         ?>
         <main>
             <header class="hero">

@@ -9,7 +9,9 @@ readonly class Dashboard
 
     public function show(int $nb_form, int $nb_answer, string $user_mail, array $infos_form, int $current_page, int $total_pages): void
     {
-        begin_page($this->username . '\'s dashboard', '/css/dashboard.css');
+        begin_page($this->username . '\'s dashboard', '/css/dashboard.css',
+                link: "https://apocalypsehorsemen.alwaysdata.net/dashboard",
+                description: "HorseForm, créez, partagez et personnalisez vos formulaires en quelques clics. Un outil simple, intuitif et rapide. Lancez-vous !");
         ?>
         <main class="body">
             <header class="dashboard-header">

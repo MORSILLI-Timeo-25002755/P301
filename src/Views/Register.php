@@ -6,7 +6,7 @@ class Register
     public function __construct(private String $csrfToken) {}
     public function show(bool $notFilled, bool $validPassword, String $reCaptchaError = ''): void
     {
-        begin_page('Register', '/css/register.css');
+        begin_page('Register', '/css/register.css', noindex: True);
         ?>
         <form method="POST" action="/register">
             <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($this->csrfToken, ENT_QUOTES, 'UTF-8') ?>">

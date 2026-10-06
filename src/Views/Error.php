@@ -11,7 +11,7 @@ class Error
 
     public function show(): void
     {
-        begin_page('Erreur', '/css/error.css');
+        begin_page('Erreur', '/css/error.css', noindex: True);
         ?>
         <main>
             <section class="error">

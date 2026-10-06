@@ -26,19 +26,60 @@ if (!isset($routes[$path])) {
 (new $routes[$path]())->execute();
 end_page();
 
-function begin_page($title, $style, $navbar = true): void {
+function begin_page($title, $style, $navbar = true, $description = "", $link = "", $noindex = false): void {
     ?>
     <!doctype html>
     <html lang="fr">
     <head>
+        <!-- Balise Méta -->
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Google -->
+        <?php if ($noindex) { ?> <meta name="robots" content="noindex, nofollow">
+        <?php } else { ?> <meta name="robots" content="index, follow"> <?php } ?>
+        <meta name="description" content="<?=$description?>">
+        <meta name="author" content="Lohann BALBAS, Gaël BARTHELEMY, Timéo MORSILLI, Mattéo YANNI">
+
+        <!-- Open Graph -->
+        <meta property="og:title" content="<?=$title?>">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="<?=$link?>">
+        <meta property="og:description" content="<?=$description?>">
+        <meta property="og:locale" content="fr_FR">
+        <meta property="og:site_name" content="HorseForm">
+
+        <!-- SChema.org JSON-LD -->
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org/",
+                "@type": "WebApplication",
+                "applicationCategory": "BusinessApplication",
+                "operatingSystem": "Web",
+                "name": "<?=$title?>",
+                "inLanguage": "fr",
+                "description": "<?=$description?>",
+                "url": "<?=$link?>",
+
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": "Aix-en-Provence",
+                    "addressRegion": "Provence Alpes Cote d'Azur",
+                    "postalCode": "13100",
+                    "addressCountry": "FR"
+                }
+            }
+        </script>
+
+
         <link rel="stylesheet" href="/css/index.css">
         <link rel="stylesheet" href="<?=$style?>">
         <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
         <link rel="manifest" href="/images/site.webmanifest">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="canonical" href="<?=$link?>">
+
         <title><?=$title?></title>
     </head>
     <body>
