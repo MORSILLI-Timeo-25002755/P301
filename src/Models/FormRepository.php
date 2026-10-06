@@ -3,7 +3,7 @@
 namespace Models;
 
 use \_assets\Includes\DatabaseConnection;
-use \Models\DatabaseException;
+use http\Exception\RuntimeException;
 use PDO;
 use PDOStatement;
 
@@ -36,7 +36,7 @@ class FormRepository
         }
 
         if ($statement === false || !$statement->execute()) {
-            throw new DatabaseException('Wrong query');
+            throw new RuntimeException('Wrong query');
         }
 
         return $statement;

@@ -3,7 +3,7 @@
 namespace Models;
 
 use \_assets\Includes\DatabaseConnection;
-use \Models\DatabaseException;
+use http\Exception\RuntimeException;
 use PDO;
 use PDOStatement;
 
@@ -24,7 +24,7 @@ class AnswerRepository
         $statement = $this->dbConnection->getConnection()->prepare($sql);
 
         if ($statement === false || !$statement->execute($params)) {
-            throw new DatabaseException('Wrong query');
+            throw new RuntimeException('Wrong query');
         }
 
         return $statement;
