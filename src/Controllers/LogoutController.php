@@ -2,7 +2,7 @@
 
 namespace Controllers;
 
-class LogoutController extends DataBaseController{
+class LogoutController extends DatabaseController {
     public function execute() {
         unset($_SESSION['user_id']);
 

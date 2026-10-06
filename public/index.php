@@ -18,17 +18,13 @@ $routes = [
 
 $path = rtrim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/') ?: '/';
 
-try {
-    if (!isset($routes[$path])) {
-        http_response_code(404);
-        (new \Views\Error('Erreur 404','Page introuvable', '/'))->show();
-        exit;
-    }
-    (new $routes[$path]())->execute();
-    end_page();
-} catch (\Exceptions\ControllerException $e) {
-    (new \Views\Error('Erreur',$e->getMessage(), '/'))->show();
+if (!isset($routes[$path])) {
+    http_response_code(404);
+    (new \Views\Error('Erreur 404','Page introuvable', '/'))->show();
+    exit;
 }
+(new $routes[$path]())->execute();
+end_page();
 
 function begin_page($title, $style, $navbar = true): void {
     ?>
