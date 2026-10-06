@@ -1,11 +1,10 @@
 <?php
 namespace Controllers;
 
-class Homepage
+class Homepage extends DatabaseController
 {
     public function execute(): void
     {
-        session_start();
         (new \Views\Homepage)->show();
     }
 }

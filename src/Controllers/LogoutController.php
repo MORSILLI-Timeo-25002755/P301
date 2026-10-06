@@ -2,10 +2,8 @@
 
 namespace Controllers;
 
-class LogoutController {
+class LogoutController extends DataBaseController{
     public function execute() {
-        session_start();
-
         unset($_SESSION['user_id']);
 
         session_destroy();
