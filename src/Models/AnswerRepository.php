@@ -14,7 +14,7 @@ class AnswerRepository
     public function findNumberOfAnswerPerUser(int $userId): int
     {
         $statement = $this->run(
-            'SELECT COUNT(DISTINCT Answer.id_user) FROM Answer INNER JOIN Question ON Answer.id_question = Question.id_question INNER JOIN Form ON Question.id_form = Form.id_user WHERE Form.id_user = :idUser', [':idUser' => $userId]
+            'SELECT COUNT(DISTINCT Answer.id_user) FROM Answer INNER JOIN Question ON Answer.id_question = Question.id_question INNER JOIN Form ON Question.id_form = Form.id_form WHERE Form.id_user = :idUser', [':idUser' => $userId]
         );
         return (int) $statement->fetchColumn();
     }
