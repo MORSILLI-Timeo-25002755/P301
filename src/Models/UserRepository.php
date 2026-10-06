@@ -42,6 +42,10 @@ class UserRepository
         );
         $row = $statement->fetch(PDO::FETCH_OBJ);
 
+        if (!$row) {
+            return null;
+        }
+
         return new Users($row->id_user, $row->email, $row->username);
     }
 
@@ -52,6 +56,21 @@ class UserRepository
             [':id_user' => $id]
         );
         $row = $statement->fetch(PDO::FETCH_OBJ);
+
+        return new Users($row->id_user, $row->email, $row->username);
+    }
+
+    public function findByUsername(string $username): ?Users
+    {
+        $statement = $this->run(
+            'SELECT id_user, email, username FROM Users WHERE username = :username',
+            [':username' => $username]
+        );
+        $row = $statement->fetch(PDO::FETCH_OBJ);
+
+        if (!$row) {
+            return null;
+        }
 
         return new Users($row->id_user, $row->email, $row->username);
     }

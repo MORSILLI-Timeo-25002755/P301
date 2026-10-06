@@ -13,6 +13,8 @@ $routes = [
     '/forgot' => \Controllers\ForgotPasswordController::class,
     '/dashboard' => \Controllers\DashboardController::class,
     '/logout' => \Controllers\LogoutController::class,
+    '/api/check-email' => \Controllers\CheckEmailController::class,
+        '/api/check-username' => \Controllers\CheckUsernameController::class
 ];
 
 $path = rtrim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/') ?: '/';

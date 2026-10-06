@@ -74,7 +74,7 @@ readonly class Dashboard
 
                     <?php foreach($infos_form as $tuple): ?>
                         <article class="survey-element">
-                            <h5><?php echo $tuple['name']; ?></h5>
+                            <h5><?php echo htmlspecialchars($tuple['name']); ?></h5>
                             <div class="survey-main-element">
                                 <div class="stat-survey">
                                     <p><?php echo $tuple['nb_questions']; echo ($tuple['nb_questions'] > 1 ? " questions" : " question"); ?></p>

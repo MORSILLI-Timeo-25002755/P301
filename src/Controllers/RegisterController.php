@@ -21,7 +21,6 @@ class RegisterController extends DatabaseController
     public function execute(): void
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            // C'est ici qu'on génère le token pour l'envoyer à la vue
             $token = $this->generateCsrfToken();
             (new \Views\Register($token))->show(notFilled: false, validPassword: true);
             exit;
@@ -49,16 +48,9 @@ class RegisterController extends DatabaseController
             exit;
         }
 
-        $hashedPassword = password_hash($password, PASSWORD_ARGON2ID);
-
-        // 8. Insertion en base de données
-        if ($this->userRepository->insertUser($email, $username, $hashedPassword)) {
+        if ($this->userRepository->insertUser($email, $username, $password)) {
             header('Location: /login');
             exit;
         }
-
-        // 9. Échec : L'email ou le nom d'utilisateur existe déjà
-        (new \Views\Error('Erreur: Inscription', 'Email ou username déjà utilisé', '/register'))->show();
-        exit;
     }
 }
