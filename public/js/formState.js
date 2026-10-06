@@ -1,5 +1,4 @@
 window.formState = {
-    email: false,
     username: false,
     password: false,
     confirm: false
@@ -8,7 +7,7 @@ window.formState = {
 window.checkFormValidity = function() {
     const btn = document.getElementById('submit-btn');
 
-    if (formState.email && formState.username && formState.password && formState.confirm) {
+    if (formState.username && formState.password && formState.confirm) {
         btn.disabled = false;
         btn.style.opacity = '1';
         btn.style.cursor = 'pointer';

@@ -3,6 +3,7 @@
         "dotenv-org/phpdotenv-vault": "^0.2.4",
         "phpmailer/phpmailer": "^7.1",
       "ext-pdo": "*",
-      "ext-couchbase": "*"
+      "ext-couchbase": "*",
+      "ext-curl": "*"
     }
 }

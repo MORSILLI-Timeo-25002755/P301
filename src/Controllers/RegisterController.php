@@ -48,9 +48,51 @@ class RegisterController extends DatabaseController
             exit;
         }
 
+        // 1. On vérifie le reCAPTCHA
+        $recaptchaResponse = filter_input(INPUT_POST, 'g-recaptcha-response');
+
+        if (empty($recaptchaResponse)) {
+            (new \Views\Error('Erreur Captcha', 'Cochez la validation captcha', '/register'))->show();
+            exit;
+        }
+
+        $secretKey = $_ENV['RECAPTCHA_SECRET_KEY'] ?? getenv('RECAPTCHA_SECRET_KEY');
+
+        $data = http_build_query([
+            'secret' => $secretKey,
+            'response' => $recaptchaResponse
+        ]);
+
+        $options = [
+            'http' => [
+                'method' => 'POST',
+                'header' => "Content-Type: application/x-www-form-urlencoded\r\n",
+                'content' => $data,
+                'ignore_errors' => true
+            ]
+        ];
+
+        $context = stream_context_create($options);
+
+        $googleResponse = file_get_contents(
+            'https://www.google.com/recaptcha/api/siteverify',
+            false,
+            $context
+        );
+
+        $responseData = json_decode($googleResponse);
+
+        if (!$responseData || !$responseData->success) {
+            (new \Views\Error('Erreur: Captcha', 'Echec de la vérification anti robot', '/register'))->show();
+            exit;
+        }
+
         if ($this->userRepository->insertUser($email, $username, $password)) {
             header('Location: /login');
             exit;
         }
+
+        (new \Views\Error('Erreur: Inscription', 'Email déjà utilisé', '/register'))->show();
+        exit;
     }
 }

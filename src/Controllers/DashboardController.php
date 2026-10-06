@@ -34,10 +34,10 @@ class DashboardController extends HandleSessionActive
             $user_mail = $userRepository->findById($_SESSION['user_id'])->getEmail();
 
             $page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
-            
+
             $limit = 6;
 
-            $total_pages = (int) ceil($nb_form / $limit);
+            $total_pages = max(1, (int) ceil($nb_form / $limit));
 
             if ($page < 1) {
                 $page = 1;
