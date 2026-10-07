@@ -13,6 +13,7 @@ $routes = [
     '/forgot' => \Controllers\ForgotPasswordController::class,
     '/dashboard' => \Controllers\DashboardController::class,
     '/logout' => \Controllers\LogoutController::class,
+    '/MentionsLegales' => \Controllers\MentionsLegalesController::class,
         '/api/check-username' => \Controllers\CheckUsernameController::class
 ];
 
