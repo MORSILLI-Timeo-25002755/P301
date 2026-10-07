@@ -76,8 +76,12 @@ function begin_page($title, $style, $navbar = true, $description = "", $link = "
         </script>
 
 
-        <link rel="stylesheet" href="/css/index.css">
-        <link rel="stylesheet" href="<?=$style?>">
+        <link rel="preload" href="/css/index.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/css/index.css"></noscript>
+
+        <link rel="preload" href="<?=$style?>" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="<?=$style?>"></noscript>
+
         <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
