@@ -114,3 +114,33 @@ input:focus-visible {
     outline: none;
     box-shadow: var(--focus-ring);
 }
+
+footer {
+    margin-top: 48px;
+    padding: 24px 16px;
+    text-align: center;
+    font-size: 0.875rem;
+    color: var(--color-text-secondary, rgba(255, 255, 255, 0.6));
+    border-top: 1px solid var(--color-border);
+}
+
+footer p {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 8px 24px;
+    margin: 0;
+}
+
+footer a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+footer a:hover,
+footer a:focus-visible {
+    color: var(--color-text, #fff);
+    text-decoration: underline;
+}

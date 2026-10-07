@@ -29,7 +29,6 @@ if (!isset($routes[$path])) {
     exit;
 }
 (new $routes[$path]())->execute();
-end_page();
 
 function begin_page($title, $style, $navbar = true, $description = "", $link = "", $noindex = false): void {
     ?>
@@ -121,6 +120,13 @@ function begin_page($title, $style, $navbar = true, $description = "", $link = "
 
 function end_page(): void {
     ?>
+        <footer>
+            <p>
+                <a href="/MentionsLegales">Mentions Legales</a>
+                <a href="/sitemap">Plan du site</a>
+                <strong>HorseForm 2026</strong>
+            </p>
+        </footer>
     </body>
     </html>
     <?php

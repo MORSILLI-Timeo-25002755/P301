@@ -2,10 +2,10 @@
 
 namespace Controllers;
 
-class MentionLegalesController
+class MentionsLegalesController
 {
     public function execute(): void
     {
-        (new \Views\MentionLegales)->show();
+        (new \Views\MentionsLegales())->show();
     }
 }
