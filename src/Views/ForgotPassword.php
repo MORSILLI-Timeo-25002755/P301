@@ -51,37 +51,25 @@ class ForgotPassword
                                     value="<?= htmlspecialchars($this->token) ?>"
                             >
 
-                            <p>
-                                <label for="password">
-                                    Nouveau mot de passe :
-                                </label>
-                                <input
-                                        type="password"
-                                        name="password"
-                                        id="password"
-                                        minlength="8"
-                                        required
-                                        autocomplete="new-password"
-                                >
-                            </p>
+                            <label for="idpwd">Mot de passe</label>
+                            <input type="password" id="idpwd" name="pwd" autocomplete="off" required>
 
-                            <p>
-                                <label for="confirm">
-                                    Confirmer le mot de passe :
-                                </label>
-                                <input
-                                        type="password"
-                                        name="confirm"
-                                        id="confirm"
-                                        minlength="8"
-                                        required
-                                        autocomplete="new-password"
-                                >
-                            </p>
+                            <ul id="password-rules" style="list-style-type: none; padding-left: 0;">
+                                <li id="rule-length"><span>❌</span> Au moins 12 caractères</li>
+                                <li id="rule-upper"><span>❌</span> Une majuscule</li>
+                                <li id="rule-lower"><span>❌</span> Une minuscule</li>
+                                <li id="rule-number"><span>❌</span> Un chiffre</li>
+                                <li id="rule-special"><span>❌</span> Un caractère spécial</li>
+                            </ul>
 
-                            <button type="submit">
-                                Changer le mot de passe
-                            </button>
+                            <label for="idconf">Confirmez votre mot de passe</label>
+                            <input type="password" id="idconf" name="conf" autocomplete="off" required>
+
+                            <span id="conf-feedback" style="display: block; margin-bottom: 15px; font-size: 0.9em;"></span>
+
+                            <button type="submit" name="send" id="submit-btn" disabled style="opacity: 0.5; cursor: not-allowed;">Changer mon mot de passe</button>
+
+
                         </fieldset>
                     </form>
 
@@ -116,6 +104,8 @@ class ForgotPassword
                 <?php } ?>
             </section>
         </main>
+        <script src="/js/formStateForgot.js"></script>
+        <script src="/js/validPassword.js"></script>
 
         <?php end_page();
     }

@@ -22,7 +22,7 @@ class RegisterController extends DatabaseController
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             $token = $this->generateCsrfToken();
-            (new \Views\Register($token))->show(notFilled: false, validPassword: true);
+            (new \Views\Register($token))->show();
             exit;
         }
 
@@ -37,14 +37,22 @@ class RegisterController extends DatabaseController
         $confirmation = (string)filter_input(INPUT_POST, 'conf');
 
         if ($email === '' || $username === '' || trim($password) === '' || $confirmation === '') {
-            $token = $this->generateCsrfToken();
-            (new \Views\Register($token))->show(notFilled: true, validPassword: true);
+            (new \Views\Error('Erreur inscription', 'L\'un des champ est vide', '/register'))->show();
             exit;
+        } else {
+            $usr_in_bd = $this->userRepository->findByUsername($username);
+            if ($usr_in_bd) {
+                (new \Views\Error('Erreur username', 'Ce nom d\'utilisateur est deja pris', '/register'))->show();
+                exit;
+            }
         }
 
-        if ($password !== $confirmation) {
-            $token = $this->generateCsrfToken();
-            (new \Views\Register($token))->show(notFilled: false, validPassword: false);
+
+
+        $regex = '/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{12,}$/';
+
+        if ($password !== $confirmation || !preg_match($regex, $password)) {
+            (new \Views\Error('Erreur password', 'Mot de passe pas assez sécurisé', '/register'))->show();
             exit;
         }
 

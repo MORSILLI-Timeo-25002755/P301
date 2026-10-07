@@ -4,7 +4,7 @@ namespace Views;
 class Register
 {
     public function __construct(private String $csrfToken) {}
-    public function show(bool $notFilled, bool $validPassword, String $reCaptchaError = ''): void
+    public function show(String $reCaptchaError = ''): void
     {
         begin_page('Register', '/css/register.css', noindex: True);
         ?>
@@ -37,14 +37,6 @@ class Register
                 <input type="password" id="idconf" name="conf" autocomplete="off" required>
 
                 <span id="conf-feedback" style="display: block; margin-bottom: 15px; font-size: 0.9em;"></span>
-
-                <!-- /<?php if ($notFilled): ?>
-                    <p class="error">Veuillez remplir tous les champs !</p>
-                <?php endif; ?>
-
-                <?php if (!$validPassword): ?>
-                    <p class="error">Échec de la confirmation du mot de passe.</p>
-                <?php endif; ?> -->
 
                 <section class="g-recaptcha" data-sitekey="6LfIy-EtAAAAAIYNRjyC47m6Fv0Y0mazw94Inkvl" style="margin-bottom: 15px;"></section>
                 <?php if (!empty($recaptchaError)): ?>

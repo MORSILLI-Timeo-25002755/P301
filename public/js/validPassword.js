@@ -4,64 +4,58 @@ document.addEventListener("DOMContentLoaded", function() {
     const confInput = document.getElementById('idconf');
     const confFeedback = document.getElementById('conf-feedback');
 
-    if (pwdInput && confInput) {
+    // Si on n'est pas sur une page avec ces champs, on arrête le script ici
+    if (!pwdInput || !confInput) return;
 
-        pwdInput.addEventListener('input', function(e) {
-            const pwd = e.target.value;
+    function updateRule(elementId, isValid) {
+        const liElement = document.getElementById(elementId);
+        if (!liElement) return;
 
-            const isLength = pwd.length >= 12;
-            const isUpper = /[A-Z]/.test(pwd);
-            const isLower = /[a-z]/.test(pwd);
-            const isNum = /[0-9]/.test(pwd);
-            const isSpec = /[\W_]/.test(pwd);
+        const spanIcon = liElement.querySelector('span');
 
-            updateRule('rule-length', isLength);
-            updateRule('rule-upper', isUpper);
-            updateRule('rule-lower', isLower);
-            updateRule('rule-number', isNum);
-            updateRule('rule-special', isSpec);
-
-            window.formState.password = (isLength && isUpper && isLower && isNum && isSpec);
-
-            window.formState.confirm = (confInput.value === pwd && pwd !== '');
-
-            window.checkFormValidity();
-        });
-
-        confInput.addEventListener('input', function(e) {
-            const conf = e.target.value;
-            const pwd = pwdInput.value;
-
-            window.formState.confirm = (conf === pwd && conf !== '');
-            window.checkFormValidity();
-
-            confInput.style.borderColor = window.formState.confirm ? 'green' : 'red';
-        });
+        if (isValid) {
+            spanIcon.textContent = '✅';
+            liElement.style.color = 'green';
+        } else {
+            spanIcon.textContent = '❌';
+            liElement.style.color = 'red';
+        }
     }
 
     function checkPasswordMatch() {
         const pwd = pwdInput.value;
         const conf = confInput.value;
+        const isMatch = (conf === pwd && conf !== '');
 
-        // Mise à jour de l'état global
-        window.formState.confirm = (conf === pwd && conf !== '');
-        window.checkFormValidity();
+        // 💡 L'ASTUCE EST ICI : On met à jour formState SEULEMENT s'il existe sur la page
+        if (typeof window.formState !== 'undefined') {
+            window.formState.confirm = isMatch;
+        }
 
-        // Gestion du texte visuel
-        if (conf === '') {
-            // Si le champ est vide, on efface tout
-            confFeedback.textContent = '';
-            confInput.style.borderColor = '';
-        } else if (conf === pwd) {
-            // Succès
-            confFeedback.textContent = '✅ Les mots de passe correspondent';
-            confFeedback.style.color = 'green';
-            confInput.style.borderColor = 'green';
-        } else {
-            // Erreur
-            confFeedback.textContent = '❌ Les mots de passe ne correspondent pas';
-            confFeedback.style.color = 'red';
-            confInput.style.borderColor = 'red';
+        // On met à jour formStateForgot SEULEMENT s'il existe sur la page
+        if (typeof window.formStateForgot !== 'undefined') {
+            window.formStateForgot.confirm = isMatch;
+        }
+
+        // Gestion visuelle
+        if (confFeedback) {
+            if (conf === '') {
+                confFeedback.textContent = '';
+                confInput.style.borderColor = '';
+            } else if (isMatch) {
+                confFeedback.textContent = '✅ Les mots de passe correspondent';
+                confFeedback.style.color = 'green';
+                confInput.style.borderColor = 'green';
+            } else {
+                confFeedback.textContent = '❌ Les mots de passe ne correspondent pas';
+                confFeedback.style.color = 'red';
+                confInput.style.borderColor = 'red';
+            }
+        }
+
+        // On appelle la fonction de vérification du bouton si elle a été déclarée
+        if (typeof window.checkFormValidity === 'function') {
+            window.checkFormValidity();
         }
     }
 
@@ -74,6 +68,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const isLower = /[a-z]/.test(pwd);
         const isNum = /[0-9]/.test(pwd);
         const isSpec = /[\W_]/.test(pwd);
+        const isPasswordValid = (isLength && isUpper && isLower && isNum && isSpec);
 
         updateRule('rule-length', isLength);
         updateRule('rule-upper', isUpper);
@@ -81,29 +76,17 @@ document.addEventListener("DOMContentLoaded", function() {
         updateRule('rule-number', isNum);
         updateRule('rule-special', isSpec);
 
-        window.formState.password = (isLength && isUpper && isLower && isNum && isSpec);
-
-        // On vérifie si ça correspond (utile si l'utilisateur modifie le mot de passe original après avoir tapé la confirmation)
-        checkPasswordMatch();
-    });
-
-    // Écouteur sur le champ Confirmation
-    confInput.addEventListener('input', function() {
-        checkPasswordMatch();
-    });
-
-    function updateRule(elementId, isValid) {
-        const liElement = document.getElementById(elementId);
-        if (!liElement) return;
-
-        const spanIcon = liElement.querySelector('span'); // On cible juste le <span>
-
-        if (isValid) {
-            spanIcon.textContent = '✅';
-            liElement.style.color = 'green';
-        } else {
-            spanIcon.textContent = '❌';
-            liElement.style.color = 'red';
+        // 💡 PAREIL ICI : Mise à jour sécurisée des états
+        if (typeof window.formState !== 'undefined') {
+            window.formState.password = isPasswordValid;
         }
-    }
+        if (typeof window.formStateForgot !== 'undefined') {
+            window.formStateForgot.password = isPasswordValid;
+        }
+
+        checkPasswordMatch();
+    });
+
+    // Écouteur sur le champ de confirmation
+    confInput.addEventListener('input', checkPasswordMatch);
 });

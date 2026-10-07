@@ -74,17 +74,15 @@ class ForgotPasswordController extends DatabaseController
             return;
         }
 
-        $password = (string) filter_input(INPUT_POST, 'password');
-        $confirm = (string) filter_input(INPUT_POST, 'confirm');
+        $password = (string) filter_input(INPUT_POST, 'pwd');
+        $confirm = (string) filter_input(INPUT_POST, 'conf');
 
-        if ($password !== $confirm) {
-            (new ForgotPassword(token: $token, error: 'Les mots de passe ne correspondent pas.'))->show();
-            return;
-        }
+        $regex = '/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{12,}$/';
 
-        if (strlen($password) < 8) {
-            (new ForgotPassword(token: $token, error: 'Le mot de passe doit contenir au moins 8 caractères.'))->show();
-            return;
+        if ($password !== $confirm || !preg_match($regex, $password)) {
+            $token = $this->generateCsrfToken();
+            (new \Views\Error('Erreur password', 'Mot de passe pas assez sécurisé', '/forgot?token=' . urlencode($token)))->show();
+            exit;
         }
 
         $this->userRepository->updatePassword($user->getId(), password_hash($password, PASSWORD_DEFAULT));
@@ -111,6 +109,7 @@ class ForgotPasswordController extends DatabaseController
         $mail = new \PHPMailer\PHPMailer\PHPMailer(true);
 
         try {
+            $mail->CharSet = 'UTF-8';
             $mail->isSMTP();
             $mail->Host = "{$_ENV['MAIL_HOST']}";
             $mail->SMTPAuth = true;
