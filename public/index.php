@@ -17,6 +17,7 @@ $routes = [
     '/surveys' => \Controllers\SurveysController::class,
     '/sitemap' => \Controllers\SitemapController::class,
     '/logout' => \Controllers\LogoutController::class,
+    '/MentionsLegales' => \Controllers\MentionsLegalesController::class,
         '/api/check-username' => \Controllers\CheckUsernameController::class
 ];
 
