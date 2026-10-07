@@ -1,7 +1,7 @@
 <?php
 namespace Controllers;
 
-class Homepage extends DatabaseController
+class HomepageController extends DatabaseController
 {
     public function execute(): void
     {

@@ -48,7 +48,7 @@ class ForgotPasswordController extends DatabaseController
         $user = $this->userRepository->findByEmail($email);
 
         if ($user !== null) {
-            $token = bin2hex(random_bytes(32));   // 64 caractères hexadécimaux
+            $token = bin2hex(random_bytes(32));
             $expiry = date('Y-m-d H:i:s', time() + 900);   // valable 15 minutes
 
             // On stocke le hash du token, jamais le token lui-même
@@ -82,7 +82,6 @@ class ForgotPasswordController extends DatabaseController
             return;
         }
 
-        // Adapte les règles à celles de ton inscription
         if (strlen($password) < 8) {
             (new ForgotPassword(token: $token, error: 'Le mot de passe doit contenir au moins 8 caractères.'))->show();
             return;
@@ -95,7 +94,6 @@ class ForgotPasswordController extends DatabaseController
 
     private function findUserByToken(string $token): ?Users
     {
-        // Format attendu : 64 caractères hexadécimaux
         if (!preg_match('/^[a-f0-9]{64}$/', $token)) {
             return null;
         }

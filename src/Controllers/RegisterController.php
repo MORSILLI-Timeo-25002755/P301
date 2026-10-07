@@ -56,7 +56,7 @@ class RegisterController extends DatabaseController
             exit;
         }
 
-        $secretKey = $_ENV['RECAPTCHA_SECRET_KEY'] ?? getenv('RECAPTCHA_SECRET_KEY');
+        $secretKey = $_ENV['RECAPTCHA_SECRET_KEY'];
 
         $data = http_build_query([
             'secret' => $secretKey,
