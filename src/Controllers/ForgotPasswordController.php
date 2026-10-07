@@ -114,14 +114,14 @@ class ForgotPasswordController extends DatabaseController
 
         try {
             $mail->isSMTP();
-            $mail->Host = "{$_SERVER['MAIL_HOST']}";
+            $mail->Host = "{$_ENV['MAIL_HOST']}";
             $mail->SMTPAuth = true;
-            $mail->Username = "{$_SERVER['MAIL_ADDRESS']}";
-            $mail->Password = "{$_SERVER['MAIL_PASSWORD']}";
+            $mail->Username = "{$_ENV['MAIL_ADDRESS']}";
+            $mail->Password = "{$_ENV['MAIL_PASSWORD']}";
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-            $mail->Port = "{$_SERVER['SMTP_PORT']}";
+            $mail->Port = "{$_ENV['SMTP_PORT']}";
 
-            $mail->setFrom("{$_SERVER['MAIL_ADDRESS']}", 'ApocalypseHorsemen');
+            $mail->setFrom("{$_ENV['MAIL_ADDRESS']}", 'ApocalypseHorsemen');
             $mail->addAddress($email);
 
             $mail->isHTML(true);
