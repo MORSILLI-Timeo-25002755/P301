@@ -12,6 +12,7 @@ $routes = [
     '/register' => \Controllers\RegisterController::class,
     '/forgot' => \Controllers\ForgotPasswordController::class,
     '/dashboard' => \Controllers\DashboardController::class,
+    '/profile' => \Controllers\ProfileController::class,
     '/logout' => \Controllers\LogoutController::class,
         '/api/check-username' => \Controllers\CheckUsernameController::class
 ];
@@ -89,6 +90,7 @@ function begin_page($title, $style, $navbar = true, $description = "", $link = "
             <nav class="navbar">
             <ul class="nav-links">
                 <li><a href="/dashboard" class="<?php echo ($currentPage == '/dashboard') ? 'active' : ''; ?>">Dashboard</a></li>
+                <li><a href="/profile" class="<?php echo ($currentPage == '/profile') ? 'active' : ''; ?>">Mon profil</a></li>
                 <li><a href="/dashboard" class="<?php #echo ($currentPage == '/login') ? 'active' : ''; ?>" >Mes sondages</a></li>
                 <li><a href="/dashboard" class="<?php #echo ($currentPage == '/register') ? 'active' : ''; ?>">Recherche</a></li>
                 <li><a href="/logout" class="button-primary">Déconnexion</a></li>

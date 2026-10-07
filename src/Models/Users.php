@@ -20,7 +20,7 @@ class Users
         return $this->email;
     }
 
-    public function getUsername(): string
+    public function getUsername(): ?string
     {
         return $this->username;
     }
