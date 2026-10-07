@@ -77,9 +77,7 @@ function begin_page($title, $style, $navbar = true, $description = "", $link = "
 
 
         <link rel="stylesheet" href="/css/index.css">
-
-        <link rel="preload" href="<?=$style?>" as="style" onload="this.onload=null;this.rel='stylesheet'">
-        <noscript><link rel="stylesheet" href="<?=$style?>"></noscript>
+        <link rel="stylesheet" href="<?=htmlspecialchars($style, ENT_QUOTES, 'UTF-8')?>">
 
         <link rel="apple-touch-icon" sizes="32x32" href="/images/favicon.ico">
         <link rel="icon" type="image/ico" sizes="32x32" href="/images/favicon.ico">
