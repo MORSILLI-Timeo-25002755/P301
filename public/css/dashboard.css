@@ -189,7 +189,7 @@ input:focus-visible {
     grid-template-columns: 1fr;
     margin-bottom: 48px;
     padding: 30px 30px;
-    min-width: 520px;
+    min-width: 0;
     background-color: var(--color-surface);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-card);
@@ -240,7 +240,7 @@ input:focus-visible {
     grid-template-columns: 1fr;
     margin-bottom: 48px;
     padding: 30px 30px;
-    min-width: 520px;
+    min-width: 0;
     background-color: var(--color-surface);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-card);
@@ -318,6 +318,7 @@ input:focus-visible {
     margin-bottom: 8px;
     font-size: 16px;
     font-weight: 800;
+    overflow-wrap: anywhere;
 }
 
 .survey-main-element {
@@ -432,5 +433,35 @@ button:hover,
     .survey-main-element button {
         padding: 10px 12px;
         font-size: 12px;
+    }
+
+    .dashboard-header h1 {
+        font-size: 32px;
+    }
+
+    .dashboard-header p {
+        font-size: 16px;
+    }
+
+    .my-survey header,
+    .survey-main-element {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .survey-main-element {
+        gap: 14px;
+    }
+
+    .survey-main-element button {
+        width: 100%;
+    }
+
+    .account {
+        overflow-wrap: anywhere;
+    }
+
+    .survey-pagination {
+        flex-wrap: wrap;
     }
 }

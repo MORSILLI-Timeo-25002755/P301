@@ -38,6 +38,7 @@ label {
 }
 
 input {
+    min-height: 48px;
     margin-bottom: 20px;
     padding: 11px;
     border: 1px solid var(--color-border-input);
@@ -50,6 +51,7 @@ input:focus {
 }
 
 button {
+    min-height: 48px;
     margin-top: 8px;
     padding: 12px;
     border: 0;
@@ -75,4 +77,15 @@ button:hover {
 
 .forgot-link:hover {
     text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+    form {
+        margin: 32px auto;
+        padding: 24px 20px;
+    }
+
+    h1 {
+        font-size: 26px;
+    }
 }

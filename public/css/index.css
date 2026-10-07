@@ -33,10 +33,16 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    overflow-x: hidden;
     font-family: Arial, sans-serif;
     background: var(--color-background);
     color: var(--color-text);
     line-height: 1.5;
+}
+
+body > main {
+    flex: 1;
+    min-height: auto;
 }
 
 .button-primary {
@@ -92,12 +98,15 @@ body {
     }
 
     .nav-links {
+        width: 100%;
         justify-content: center;
         gap: 8px;
     }
 
     .nav-links a {
-        padding: 8px 12px;
+        display: block;
+        padding: 8px 10px;
+        font-size: 14px;
     }
 
     .brand {
@@ -143,7 +152,7 @@ input:focus-visible {
     box-shadow: var(--focus-ring);
 }
 
-footer {
+body > footer {
     margin-top: auto;
     padding: 28px 16px;
     background: var(--color-surface);
@@ -153,7 +162,11 @@ footer {
     font-size: 0.875rem;
 }
 
-footer p {
+body > footer {
+    flex-shrink: 0;
+}
+
+footer:not(.survey-main-element) p {
     width: min(var(--content-width), 100%);
     margin: 0 auto;
     display: flex;
@@ -163,7 +176,7 @@ footer p {
     gap: 8px 12px;
 }
 
-footer p::before {
+footer:not(.survey-main-element) p::before {
     content: "";
     width: 4px;
     height: 4px;
@@ -172,7 +185,7 @@ footer p::before {
     background: var(--color-primary);
 }
 
-footer a {
+footer:not(.survey-main-element) a {
     padding: 6px 10px;
     border-radius: var(--radius-control);
     color: var(--color-text-secondary);
@@ -180,14 +193,14 @@ footer a {
     transition: color 0.2s ease, background-color 0.2s ease;
 }
 
-footer a:hover,
-footer a:focus-visible {
+footer:not(.survey-main-element) a:hover,
+footer:not(.survey-main-element) a:focus-visible {
     color: var(--color-primary);
     background-color: var(--color-primary-light);
     text-decoration: none;
 }
 
-footer strong {
+footer:not(.survey-main-element) strong {
     padding-left: 12px;
     border-left: 1px solid var(--color-border);
     color: var(--color-text);
@@ -195,16 +208,25 @@ footer strong {
 }
 
 @media (max-width: 480px) {
-    footer {
+    body > footer {
         margin-top: auto;
         padding: 24px 16px;
     }
 
-    footer p::before {
+    footer:not(.survey-main-element) p {
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    footer:not(.survey-main-element) a {
+        padding: 6px 8px;
+    }
+
+    footer:not(.survey-main-element) p::before {
         display: none;
     }
 
-    footer strong {
+    footer:not(.survey-main-element) strong {
         width: 100%;
         padding: 8px 0 0;
         border-top: 1px solid var(--color-border);
