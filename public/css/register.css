@@ -88,6 +88,8 @@ legend {
 .captcha-wrapper {
     display: flex;
     justify-content: center;
+    max-width: 100%;
+    overflow: hidden;
     margin: 4px 0 18px;
 }
 
@@ -146,12 +148,27 @@ input[type="submit"]:not(:disabled):hover {
         padding: 24px 20px;
     }
 
+    legend {
+        font-size: 23px;
+    }
+
     .password-rules {
         grid-template-columns: 1fr;
+    }
+
+    .password-rules li {
+        white-space: normal;
+        overflow-wrap: anywhere;
     }
 
     .g-recaptcha {
         transform: scale(0.88);
         transform-origin: center;
+    }
+}
+
+@media (max-width: 380px) {
+    .g-recaptcha {
+        transform: scale(0.77);
     }
 }

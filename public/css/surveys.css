@@ -48,11 +48,13 @@
 .survey-card h2 {
     margin-bottom: 8px;
     font-size: 20px;
+    overflow-wrap: anywhere;
 }
 
 .survey-author {
     margin-bottom: 18px;
     font-size: 14px;
+    overflow-wrap: anywhere;
 }
 
 .survey-questions {
@@ -80,5 +82,10 @@
 
     .survey-grid {
         grid-template-columns: 1fr;
+    }
+
+    .survey-card,
+    .empty-surveys {
+        padding: 20px;
     }
 }

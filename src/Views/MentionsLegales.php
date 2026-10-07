@@ -15,22 +15,20 @@ readonly class MentionsLegales
             link: "https://apocalypsehorsemen.alwaysdata.net/MentionLegales");
         ?>
 
-        <main class="body">
+        <main class="legal-page">
 
-            <header class="hero">
-                <div class="badge">
-                    <h2>Droits Utilisateurs</h2>
-                </div>
+            <header class="legal-header">
+                <p class="page-descriptor">Droits utilisateurs</p>
 
                 <h1>Mentions Légales</h1>
 
                 <p class="description">Cette page présente les informations légales relatives au projet d'étude HorseForm</p>
             </header>
 
-            <main class="card">
+            <article class="legal-card">
 
-                <h2>Application</h2>
-                <section>
+                <section class="legal-section">
+                    <h2>Application</h2>
                     <p><strong>Éditeur :</strong> Lohann BALBAS</p>
                     <p>
                         <strong>Raison sociale et dénomination :</strong> le directeur de la publication est
@@ -49,8 +47,8 @@ readonly class MentionsLegales
                     </p>
                 </section>
 
-                <h2>Hébergement</h2>
-                <section>
+                <section class="legal-section">
+                    <h2>Hébergement</h2>
                     <p>
                         Le site est hébergé par la société ALWAYSDATA, SARL au capital de 200 000 €,
                         immatriculée au RCS de Paris sous le numéro 492 893 490, dont le siège social est situé
@@ -63,8 +61,8 @@ readonly class MentionsLegales
                     </p>
                 </section>
 
-                <h2>Politique de confidentialité</h2>
-                <section>
+                <section class="legal-section">
+                    <h2>Politique de confidentialité</h2>
 
                     <h3>Responsable du traitement</h3>
                     <p>
@@ -140,7 +138,7 @@ readonly class MentionsLegales
                         d'aucun transfert en dehors de l'Union européenne.
                     </p>
                 </section>
-            </main>
+            </article>
         </main>
 
 
