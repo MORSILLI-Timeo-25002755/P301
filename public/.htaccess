@@ -18,5 +18,6 @@ RewriteRule ^ index.php [L]
     # Vous pouvez également en profiter pour mettre en cache d'autres ressources statiques
     ExpiresByType image/jpeg "access plus 1 month"
     ExpiresByType image/png "access plus 1 month"
+    ExpiresByType image/webp "access plus 1 month"
     ExpiresByType application/javascript "access plus 1 month"
 </IfModule>
