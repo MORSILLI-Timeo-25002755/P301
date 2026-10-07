@@ -15,6 +15,7 @@ $routes = [
     '/dashboard' => \Controllers\DashboardController::class,
     '/profile' => \Controllers\ProfileController::class,
     '/surveys' => \Controllers\SurveysController::class,
+    '/sitemap' => \Controllers\SitemapController::class,
     '/logout' => \Controllers\LogoutController::class,
         '/api/check-username' => \Controllers\CheckUsernameController::class
 ];
@@ -95,6 +96,7 @@ function begin_page($title, $style, $navbar = true, $description = "", $link = "
                 <li><a href="/profile" class="<?php echo ($currentPage == '/profile') ? 'active' : ''; ?>">Mon profil</a></li>
                 <li><a href="/dashboard">Mes sondages</a></li>
                 <li><a href="/surveys" class="<?php echo ($currentPage == '/surveys') ? 'active' : ''; ?>">Tous les sondages</a></li>
+                <li><a href="/sitemap" class="<?php echo ($currentPage == '/sitemap') ? 'active' : ''; ?>">Plan du site</a></li>
                 <li><a href="/logout" class="button-primary">Déconnexion</a></li>
             </ul>
             </nav>
@@ -104,6 +106,7 @@ function begin_page($title, $style, $navbar = true, $description = "", $link = "
         <ul class="nav-links">
             <li><a href="/" class="<?php echo ($currentPage == '/') ? 'active' : ''; ?>">Accueil</a></li>
             <li><a href="/surveys" class="<?php echo ($currentPage == '/surveys') ? 'active' : ''; ?>">Sondages</a></li>
+            <li><a href="/sitemap" class="<?php echo ($currentPage == '/sitemap') ? 'active' : ''; ?>">Plan du site</a></li>
             <li><a href="/login" class="<?php echo ($currentPage == '/login') ? 'active' : ''; ?>">Connexion</a></li>
             <li><a href="/register" class="<?php echo ($currentPage == '/register') ? 'active' : ''; ?>">Inscription</a></li>
         </ul>
