@@ -17,7 +17,6 @@ $routes = [
     '/surveys' => \Controllers\SurveysController::class,
     '/sitemap' => \Controllers\SitemapController::class,
     '/logout' => \Controllers\LogoutController::class,
-    '/MentionsLegales' => \Controllers\MentionsLegalesController::class,
         '/api/check-username' => \Controllers\CheckUsernameController::class
 ];
 
@@ -77,8 +76,7 @@ function begin_page($title, $style, $navbar = true, $description = "", $link = "
         </script>
 
 
-        <link rel="preload" href="/css/index.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-        <noscript><link rel="stylesheet" href="/css/index.css"></noscript>
+        <link rel="stylesheet" href="/css/index.css">
 
         <link rel="preload" href="<?=$style?>" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="<?=$style?>"></noscript>
