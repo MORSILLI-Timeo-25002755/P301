@@ -33,7 +33,8 @@ class ForgotPasswordController extends DatabaseController
     private function requestReset(): void
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            (new ForgotPassword())->show();
+            $token = $this->generateCsrfToken();
+            (new ForgotPassword(csrfToken : $token))->show();
             return;
         }
 

@@ -7,6 +7,7 @@ class ForgotPassword
             private ?string $token = null,
             private ?string $message = null,
             private ?string $error = null,
+            private ?string $csrfToken = null,
     ) {
     }
 
@@ -40,6 +41,7 @@ class ForgotPassword
                 <?php } elseif ($this->token) { ?>
 
                     <form method="post" action="/forgot">
+                        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($this->csrfToken, ENT_QUOTES, 'UTF-8') ?>">
                         <fieldset>
                             <legend>Modifier votre mot de passe</legend>
 
@@ -86,6 +88,7 @@ class ForgotPassword
                 <?php } else { ?>
 
                     <form method="post" action="/forgot">
+                        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($this->csrfToken, ENT_QUOTES, 'UTF-8') ?>">
                         <fieldset>
                             <legend>Réinitialisation du mot de passe</legend>
 
