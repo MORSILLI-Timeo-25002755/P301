@@ -27,6 +27,22 @@ class FormRepository
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function findAllForms(): array
+    {
+        $statement = $this->run(
+            'SELECT f.id_form, f.name, u.username,
+                    COUNT(q.id_question) AS nb_questions
+             FROM Form f
+             INNER JOIN Users u ON u.id_user = f.id_user
+             LEFT JOIN Question q ON q.id_form = f.id_form
+             GROUP BY f.id_form, f.name, u.username
+             ORDER BY f.id_form DESC',
+            []
+        );
+
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     private function run(string $sql, array $params): PDOStatement
     {
         $statement = $this->dbConnection->getConnection()->prepare($sql);
