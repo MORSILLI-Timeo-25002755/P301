@@ -38,7 +38,8 @@ class LoginController extends DatabaseController
 
         if ($user === null) {
             $this->logSecurity('CONNEXION ECHOUEE', 'Tentative de connexion');
-            (new Error('Erreur: Connexion', 'Mot de passe ou email incorrect', '/login'))->show();
+            $token = $this->generateCsrfToken();
+            (new Login($token, $email, 'Mot de passe ou adresse e-mail incorrect.'))->show();
             exit;
         }
 

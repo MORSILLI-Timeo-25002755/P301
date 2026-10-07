@@ -4,7 +4,12 @@ namespace Views;
 class Login
 {
 
-    public function __construct(private String $csrfToken) {}
+    public function __construct(
+        private string $csrfToken,
+        private string $email = '',
+        private string $error = ''
+    ) {}
+
     public function show(): void { // PSR-12: opening brace next line
         begin_page('Login', '/css/login.css', noindex: True);
         ?>
@@ -13,8 +18,12 @@ class Login
             <h1>Connexion</h1>
             <p>Connectez-vous à votre compte</p>
 
+            <?php if ($this->error !== ''): ?>
+                <p class="login-error"><?= htmlspecialchars($this->error, ENT_QUOTES, 'UTF-8') ?></p>
+            <?php endif; ?>
+
             <label for="email">Adresse e-mail</label>
-            <input type="email" name="email" required>
+            <input type="email" name="email" value="<?= htmlspecialchars($this->email, ENT_QUOTES, 'UTF-8') ?>" required>
 
             <label for="pwd">Mot de passe</label>
             <input type="password" name="password" required>
