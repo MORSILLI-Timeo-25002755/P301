@@ -11,7 +11,7 @@ class Login
     ) {}
 
     public function show(): void { // PSR-12: opening brace next line
-        begin_page('Login', '/css/login.css', noindex: True);
+        begin_page('Login', '/css/login.css', true, 'Connectez -vous à HorseForm pour accéder à vos sondages ainsi que pour répondre aux sondages des autres !');
         ?>
         <form method="post" action="/login">
             <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($this->csrfToken, ENT_QUOTES, 'UTF-8') ?>">
