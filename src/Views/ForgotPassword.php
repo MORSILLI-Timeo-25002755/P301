@@ -17,11 +17,19 @@ class ForgotPassword
         begin_page('Mot de passe oublié', '/css/forgotPassword.css', noindex: True);
         ?>
 
-        <main>
+        <main class="forgot-page">
             <section aria-labelledby="page-title">
-                <h1 id="page-title">
-                    <?= $this->token ? 'Nouveau mot de passe' : 'Mot de passe oublié' ?>
-                </h1>
+                <header class="forgot-header">
+                    <p class="page-descriptor">Accès au compte</p>
+                    <h1 id="page-title">
+                        <?= $this->token ? 'Nouveau mot de passe' : 'Mot de passe oublié' ?>
+                    </h1>
+                    <?php if (!$this->token && !$this->message): ?>
+                        <p>Recevez un lien pour définir un nouveau mot de passe.</p>
+                    <?php elseif ($this->token): ?>
+                        <p>Choisissez un nouveau mot de passe sécurisé pour votre compte.</p>
+                    <?php endif; ?>
+                </header>
 
                 <?php if ($this->error) { ?>
                     <p class="error" role="alert">
@@ -38,48 +46,50 @@ class ForgotPassword
                         <a href="/login">Se connecter</a>
                     </p>
                 <?php } elseif ($this->token) { ?>
-                    <form method="post" action="/forgot">
+                    <form class="forgot-form" method="post" action="/forgot">
                         <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($this->csrfToken, ENT_QUOTES, 'UTF-8') ?>">
                         <fieldset>
                             <legend>Modifier votre mot de passe</legend>
 
                             <input type="hidden" name="token" value="<?= htmlspecialchars($this->token) ?>">
 
-                            <label for="idpwd">Mot de passe</label>
-                            <input type="password" id="idpwd" name="pwd" autocomplete="off" required>
+                            <div class="field">
+                                <label for="idpwd">Mot de passe</label>
+                                <input type="password" id="idpwd" name="pwd" autocomplete="new-password" required>
 
-                            <ul id="password-rules" style="list-style-type: none; padding-left: 0;">
-                                <li id="rule-length"><span>❌</span> Au moins 12 caractères</li>
-                                <li id="rule-upper"><span>❌</span> Une majuscule</li>
-                                <li id="rule-lower"><span>❌</span> Une minuscule</li>
-                                <li id="rule-number"><span>❌</span> Un chiffre</li>
-                                <li id="rule-special"><span>❌</span> Un caractère spécial</li>
-                            </ul>
+                                <ul id="password-rules" class="password-rules">
+                                    <li id="rule-length"><span>❌</span> Au moins 12 caractères</li>
+                                    <li id="rule-upper"><span>❌</span> Une majuscule</li>
+                                    <li id="rule-lower"><span>❌</span> Une minuscule</li>
+                                    <li id="rule-number"><span>❌</span> Un chiffre</li>
+                                    <li id="rule-special"><span>❌</span> Un caractère spécial</li>
+                                </ul>
+                            </div>
 
-                            <label for="idconf">Confirmez votre mot de passe</label>
-                            <input type="password" id="idconf" name="conf" autocomplete="off" required>
+                            <div class="field">
+                                <label for="idconf">Confirmez votre mot de passe</label>
+                                <input type="password" id="idconf" name="conf" autocomplete="new-password" required>
 
-                            <span id="conf-feedback" style="display: block; margin-bottom: 15px; font-size: 0.9em;"></span>
+                                <span id="conf-feedback" class="field-feedback" aria-live="polite"></span>
+                            </div>
 
-                            <button type="submit" name="send" id="submit-btn" disabled style="opacity: 0.5; cursor: not-allowed;">
+                            <button class="submit-button" type="submit" name="send" id="submit-btn" disabled>
                                 Changer mon mot de passe
                             </button>
                         </fieldset>
                     </form>
                 <?php } else { ?>
-                    <form method="post" action="/forgot">
+                    <form class="forgot-form" method="post" action="/forgot">
                         <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($this->csrfToken, ENT_QUOTES, 'UTF-8') ?>">
                         <fieldset>
                             <legend>Réinitialisation du mot de passe</legend>
 
-                            <p>
-                                <label for="email">Votre adresse e-mail :</label>
+                            <div class="field">
+                                <label for="email">Adresse e-mail</label>
                                 <input type="email" name="email" id="email" required autocomplete="email">
-                            </p>
+                            </div>
 
-                            <p>
-                                <button type="submit">Envoyer le lien</button>
-                            </p>
+                            <button class="submit-button" type="submit">Envoyer le lien</button>
                         </fieldset>
                     </form>
                 <?php } ?>
