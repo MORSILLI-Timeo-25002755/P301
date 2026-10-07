@@ -7,3 +7,16 @@ RewriteRule ^ - [L]
 
 # Tout le reste est envoyé vers index.php
 RewriteRule ^ index.php [L]
+
+<IfModule mod_expires.c>
+    # Activer le module
+    ExpiresActive On
+
+    # Définir le cache pour les fichiers CSS (1 mois par exemple)
+    ExpiresByType text/css "access plus 1 month"
+
+    # Vous pouvez également en profiter pour mettre en cache d'autres ressources statiques
+    ExpiresByType image/jpeg "access plus 1 month"
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+</IfModule>
