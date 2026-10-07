@@ -1,6 +1,7 @@
 <?php
 
 namespace Views;
+
 class ForgotPassword
 {
     public function __construct(
@@ -29,7 +30,6 @@ class ForgotPassword
                 <?php } ?>
 
                 <?php if ($this->message) { ?>
-
                     <p class="success" role="status">
                         <?= htmlspecialchars($this->message) ?>
                     </p>
@@ -37,19 +37,13 @@ class ForgotPassword
                     <p>
                         <a href="/login">Se connecter</a>
                     </p>
-
                 <?php } elseif ($this->token) { ?>
-
                     <form method="post" action="/forgot">
                         <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($this->csrfToken, ENT_QUOTES, 'UTF-8') ?>">
                         <fieldset>
                             <legend>Modifier votre mot de passe</legend>
 
-                            <input
-                                    type="hidden"
-                                    name="token"
-                                    value="<?= htmlspecialchars($this->token) ?>"
-                            >
+                            <input type="hidden" name="token" value="<?= htmlspecialchars($this->token) ?>">
 
                             <label for="idpwd">Mot de passe</label>
                             <input type="password" id="idpwd" name="pwd" autocomplete="off" required>
@@ -67,46 +61,35 @@ class ForgotPassword
 
                             <span id="conf-feedback" style="display: block; margin-bottom: 15px; font-size: 0.9em;"></span>
 
-                            <button type="submit" name="send" id="submit-btn" disabled style="opacity: 0.5; cursor: not-allowed;">Changer mon mot de passe</button>
-
-
+                            <button type="submit" name="send" id="submit-btn" disabled style="opacity: 0.5; cursor: not-allowed;">
+                                Changer mon mot de passe
+                            </button>
                         </fieldset>
                     </form>
-
                 <?php } else { ?>
-
                     <form method="post" action="/forgot">
                         <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($this->csrfToken, ENT_QUOTES, 'UTF-8') ?>">
                         <fieldset>
                             <legend>Réinitialisation du mot de passe</legend>
 
                             <p>
-                                <label for="email">
-                                    Votre adresse e-mail :
-                                </label>
-                                <input
-                                        type="email"
-                                        name="email"
-                                        id="email"
-                                        required
-                                        autocomplete="email"
-                                >
+                                <label for="email">Votre adresse e-mail :</label>
+                                <input type="email" name="email" id="email" required autocomplete="email">
                             </p>
 
                             <p>
-                                <button type="submit">
-                                    Envoyer le lien
-                                </button>
+                                <button type="submit">Envoyer le lien</button>
                             </p>
                         </fieldset>
                     </form>
-
                 <?php } ?>
             </section>
         </main>
+
         <script src="/js/formStateForgot.js"></script>
         <script src="/js/validPassword.js"></script>
 
-        <?php end_page();
+        <?php
+        end_page();
     }
 }
