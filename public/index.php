@@ -91,6 +91,10 @@ function begin_page($title, $style, $navbar = true, $description = "", $link = "
         $currentPage = $_SERVER['REQUEST_URI'];
         if (isset($_SESSION['user_id'])) { ?>
             <nav class="navbar">
+            <a class="brand" href="/" aria-label="HorseForm, accueil">
+                <img src="/images/logo.webp" alt="">
+                <span>HorseForm</span>
+            </a>
             <ul class="nav-links">
                 <li><a href="/dashboard" class="<?php echo ($currentPage == '/dashboard') ? 'active' : ''; ?>">Dashboard</a></li>
                 <li><a href="/profile" class="<?php echo ($currentPage == '/profile') ? 'active' : ''; ?>">Mon profil</a></li>
@@ -103,6 +107,10 @@ function begin_page($title, $style, $navbar = true, $description = "", $link = "
             <?php }
         else {?>
     <nav class="navbar">
+        <a class="brand" href="/" aria-label="HorseForm, accueil">
+            <img src="/images/logo.webp" alt="">
+            <span>HorseForm</span>
+        </a>
         <ul class="nav-links">
             <li><a href="/" class="<?php echo ($currentPage == '/') ? 'active' : ''; ?>">Accueil</a></li>
             <li><a href="/surveys" class="<?php echo ($currentPage == '/surveys') ? 'active' : ''; ?>">Sondages</a></li>
