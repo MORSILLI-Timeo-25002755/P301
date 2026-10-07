@@ -118,15 +118,77 @@ class ForgotPasswordController extends DatabaseController
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
             $mail->Port = "{$_ENV['SMTP_PORT']}";
 
-            $mail->setFrom("{$_ENV['MAIL_ADDRESS']}", 'ApocalypseHorsemen');
+            $mail->setFrom("{$_ENV['MAIL_ADDRESS']}", 'HorseForm');
             $mail->addAddress($email);
 
             $mail->isHTML(true);
             $mail->Subject = 'Réinitialisation de votre mot de passe';
-            $mail->Body = '<p>Bonjour,</p>'
-                . '<p>Pour choisir un nouveau mot de passe, cliquez ici : '
-                . '<a href="' . htmlspecialchars($resetLink) . '">Réinitialiser mon mot de passe</a></p>'
-                . '<p>Ce lien expire dans 15 minutes. Si vous n\'êtes pas à l\'origine de cette demande, ignorez ce message.</p>';
+            $safeResetLink = htmlspecialchars($resetLink, ENT_QUOTES, 'UTF-8');
+            $mail->Body = <<<HTML
+<!doctype html>
+<html lang="fr">
+<body style="margin:0; padding:0; background-color:#f8fafc; color:#0f172a; font-family:Arial,Helvetica,sans-serif;">
+    <div style="display:none; max-height:0; overflow:hidden; opacity:0;">
+        Réinitialisez votre mot de passe HorseForm en quelques clics.
+    </div>
+    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background-color:#f8fafc;">
+        <tr>
+            <td align="center" style="padding:40px 16px;">
+                <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="max-width:560px;">
+                    <tr>
+                        <td align="center" style="padding:0 0 20px;">
+                            <a href="{$baseUrl}" style="color:#4f46e5; font-size:24px; font-weight:700; text-decoration:none;">
+                                HorseForm
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="background-color:#ffffff; border:1px solid #e2e8f0; border-radius:8px; padding:40px 36px;">
+                            <p style="margin:0 0 12px; color:#4f46e5; font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase;">
+                                Sécurité du compte
+                            </p>
+                            <h1 style="margin:0 0 16px; color:#0f172a; font-size:28px; line-height:1.25;">
+                                Réinitialisez votre mot de passe
+                            </h1>
+                            <p style="margin:0 0 24px; color:#64748b; font-size:16px; line-height:1.6;">
+                                Bonjour,<br><br>
+                                Une demande de réinitialisation de mot de passe a été effectuée pour votre compte HorseForm.
+                            </p>
+                            <table role="presentation" cellspacing="0" cellpadding="0" border="0">
+                                <tr>
+                                    <td style="border-radius:6px; background-color:#4f46e5;">
+                                        <a href="{$safeResetLink}" style="display:inline-block; padding:14px 22px; color:#ffffff; font-size:15px; font-weight:700; text-decoration:none;">
+                                            Choisir un nouveau mot de passe
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+                            <p style="margin:28px 0 0; padding-top:20px; border-top:1px solid #e2e8f0; color:#64748b; font-size:13px; line-height:1.6;">
+                                Ce lien est valable pendant <strong style="color:#0f172a;">15 minutes</strong>.
+                                Si vous n'êtes pas à l'origine de cette demande, vous pouvez ignorer cet e-mail.
+                            </p>
+                            <p style="margin:16px 0 0; color:#94a3b8; font-size:12px; line-height:1.5; word-break:break-all;">
+                                Le bouton ne fonctionne pas ? Copiez ce lien dans votre navigateur :<br>
+                                <a href="{$safeResetLink}" style="color:#4f46e5;">{$safeResetLink}</a>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center" style="padding:22px 16px 0; color:#94a3b8; font-size:12px;">
+                            © 2026 HorseForm · Créez, partagez et analysez vos sondages.
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
+HTML;
+            $mail->AltBody = "Bonjour,\n\n"
+                . "Une demande de réinitialisation de mot de passe a été effectuée pour votre compte HorseForm.\n\n"
+                . "Choisissez un nouveau mot de passe : {$resetLink}\n\n"
+                . "Ce lien est valable pendant 15 minutes. Si vous n'êtes pas à l'origine de cette demande, ignorez cet e-mail.";
 
             $mail->send();
             return true;
