@@ -58,45 +58,51 @@ readonly class Dashboard
                     </form>
                 </section>
 
-                <section class="my-survey">
+                <section class="my-survey" id="mes-sondages">
                     <header>
                         <h3>Mes sondages</h3>
-                        <div class="surgey-counter"><?php echo $nb_form; echo ($nb_form > 1 ? " sondages" : " sondage"); ?></div>
+                        <p class="surgey-counter"><?php echo $nb_form; echo ($nb_form > 1 ? " sondages" : " sondage"); ?></p>
                     </header>
 
                     <?php if($nb_form == 0): ?>
-                    <main class="none-survey">
-                        <div class="notepad">📋</div>
-                        <h5>Vous n'avez pas encore créé de sondage</h5>
-                        <p>Utilisez le formulaire ci-dessus pour lancer votre tout premier sondage.</p>
-                    </main>
+                        <section class="none-survey">
+                            <span class="notepad" aria-hidden="true">📋</span>
+                            <h5>Vous n'avez pas encore créé de sondage</h5>
+                            <p>Utilisez le formulaire ci-dessus pour lancer votre tout premier sondage.</p>
+                        </section>
 
                     <?php else: ?>
-                    <main class="survey-list">
+                        <section class="survey-list">
 
-                    <?php foreach($infos_form as $tuple): ?>
-                        <article class="survey-element">
-                            <h5><?php echo htmlspecialchars($tuple['name']); ?></h5>
-                            <div class="survey-main-element">
-                                <div class="stat-survey">
-                                    <p><?php echo $tuple['nb_questions']; echo ($tuple['nb_questions'] > 1 ? " questions" : " question"); ?></p>
-                                    <p><?php echo $tuple['nb_answers']; echo ($tuple['nb_answers'] > 1 ? " réponses" : " réponse"); ?></p>
-                                </div>
-                                <button type="button">Voir / Gérer</button>
-                            </div>
-                        </article>
+                            <?php foreach($infos_form as $tuple): ?>
+                                <article class="survey-element">
+                                    <header>
+                                        <h5><?php echo htmlspecialchars($tuple['name']); ?></h5>
+                                    </header>
+                                    <footer class="survey-main-element">
+                                        <ul class="stat-survey">
+                                            <li><?php echo $tuple['nb_questions']; echo ($tuple['nb_questions'] > 1 ? " questions" : " question"); ?></li>
+                                            <li><?php echo $tuple['nb_answers']; echo ($tuple['nb_answers'] > 1 ? " réponses" : " réponse"); ?></li>
+                                        </ul>
+                                        <button type="button">Voir / Gérer</button>
+                                    </footer>
+                                </article>
 
-                    <?php endforeach ?>
-                    </main>
+                            <?php endforeach ?>
+                        </section>
 
-                    <footer class="survey-pagination">
-                        <?php if($current_page > 1): ?>
-                        <a href="?page=<?php echo $current_page == 1 ? $current_page : $current_page - 1; ?>"><button class="button-pagination"><</button></a>
-                        <?php endif; ?>
-                        <?php if($current_page < $total_pages): ?>
-                        <a href="?page=<?php echo $current_page + 1; ?>"><button class="button-pagination">></button></a>
-                        <?php endif; ?>
-                    </footer>
+                        <footer class="survey-pagination">
+                            <?php if($current_page > 1): ?>
+                                <a href="?page=<?php echo $current_page - 1; ?>#mes-sondages" class="button-pagination" aria-label="Page précédente">&lt;</a>
+                            <?php endif; ?>
+
+                            <!-- Affichage des pages avec un élément sémantique neutre -->
+                            <span class="pagination-info">Page <?php echo $current_page; ?> sur <?php echo $total_pages; ?></span>
+
+                            <?php if($current_page < $total_pages): ?>
+                                <a href="?page=<?php echo $current_page + 1; ?>#mes-sondages" class="button-pagination" aria-label="Page suivante">&gt;</a>
+                            <?php endif; ?>
+                        </footer>
 
                     <?php endif; ?>
 
