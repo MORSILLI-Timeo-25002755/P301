@@ -7,6 +7,13 @@ main {
     text-align: center;
 }
 
+.hero-logo {
+    width: 96px;
+    height: 96px;
+    margin-bottom: 24px;
+    object-fit: contain;
+}
+
 .badge {
     display: inline-block;
     padding: 8px 14px;
