@@ -3,7 +3,7 @@ require __DIR__ . '/../vendor/autoload.php';
 require '../src/_assets/Includes/autoloader.php';
 
 ini_set('log_errors', 'On');
-ini_set('error_log', '/chemin/fichier/logs/errors.log'); // Sur le serveur, créer un fichier de logs et mettre son emplacement ici. A faire directement sur le serv pas sur git ou quoi
+ini_set('error_log', '/logs/errors.log'); // Sur le serveur, créer un fichier de logs et mettre son emplacement ici. A faire directement sur le serv pas sur git ou quoi
 
 
 $routes = [
