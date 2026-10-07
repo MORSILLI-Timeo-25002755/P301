@@ -88,7 +88,9 @@ class RegisterController extends DatabaseController
         }
 
         if ($this->userRepository->insertUser($email, $username, $password)) {
-            header('Location: /login');
+            $user = $this->userRepository->checkLogin($email, $password);
+            $_SESSION['user_id'] = $user->getId();
+            header('Location: /dashboard');
             exit;
         }
 
