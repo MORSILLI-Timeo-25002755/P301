@@ -21,7 +21,7 @@ abstract class DatabaseController
             session_set_cookie_params([
                 'lifetime' => 86400, // 1 jour
                 'path' => '/',
-                // 'domain' => $_SERVER['HTTP_HOST'],
+                'domain' => $_SERVER['HTTP_HOST'],
                 'secure' => isset($_SERVER['HTTPS']), // True si HTTPS (AlwaysData)
                 'httponly' => true, // Bloque les attaques XSS (impossible à lire en JS)
                 'samesite' => 'Strict' // Bloque les attaques CSRF
